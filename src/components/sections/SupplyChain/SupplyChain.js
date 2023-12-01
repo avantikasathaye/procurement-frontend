@@ -22,6 +22,9 @@ import TabPanel from '@mui/lab/TabPanel';
 import { Scrollbar } from '../../scrollBar';
 import { Products_Discount, Products_PriceDetails, Products_ProductDetails, SupplyChain_Dashboard } from '../../statelessViews';
 import Products from '../Products';
+import Inventory from './Inventory/Inventory';
+import Suppliers from './Suppliers/Suppliers';
+import { brandKit } from '../../../theme/colors';
 
 const SupplyChain = () => {
     const dispatch = useDispatch();
@@ -35,18 +38,18 @@ const SupplyChain = () => {
     setShowAddProductsForm(!showAddProductsForm)
   }
 
-  const productList = useSelector(state => state.productList)
-  const { products } = productList
-
-  useEffect(() => {
-    dispatch(listProducts())
-  }, [dispatch])
-
   const [value, setValue] = useState('one');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const productList = useSelector(state => state.productList)
+  const { products } = productList
+
+  useEffect(() => {
+    dispatch(listProducts())
+  },[dispatch])
 
 
   return (
@@ -59,18 +62,20 @@ const SupplyChain = () => {
         <Container maxWidth="lg">
        <div style={{display: "flex", flexDirection: "row"}}>
         <Card style={{marginRight: "20px"}}>
-            <Box sx={{ minWidth: 300 }}>
-            <TabContext value={value}>
-            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: "auto",  width: "min-content" }}>
+           {/*  <Box sx={{ minWidth: 300 }} > */}
+            <TabContext value={value} >
+            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: "auto", 
+                         width: "min-content" , justifyContent: "flex-start", alignContent: "flex-start"}}>
                 <Tabs
-                orientation="vertical"
-                value={value} 
-                onChange={handleChange}
-                indicatorColor='white'
-                textColor="primary"
-                aria-label="secondary tabs example"
-                initialselectedindex={value}
-                centered
+                    orientation="vertical"
+                    value={value} 
+                    onChange={handleChange}
+                    indicatorColor='white'
+                    textColor="red"
+                    aria-label="secondary tabs example"
+                    initialselectedindex={value}
+                    centered
+                    style={{backgroundColor: brandKit.sideNav}}
                 >
                 <Tab value="1" label="Dashboard" />
                 <Tab value="2" label="Inventory" />
@@ -83,7 +88,7 @@ const SupplyChain = () => {
                 </Tabs>
             </Box>
             </TabContext>
-            </Box>
+            {/* </Box> */}
         </Card>
         <Card style={{minWidth: 1000}}>
             <Scrollbar>
@@ -91,23 +96,28 @@ const SupplyChain = () => {
                 <TabContext value={value}>
                 <TabPanel value="1">
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                        <SupplyChain_Dashboard title="Supplied Approved"/>
+                        <SupplyChain_Dashboard title="Supplies Approved"/>
                         <SupplyChain_Dashboard title="Pending"/>
                         <SupplyChain_Dashboard title="Rejected"/>
                     </div>
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
-                        <SupplyChain_Dashboard_UpdatesCard />
+                        <SupplyChain_Dashboard_UpdatesCard totalProducts={products.length}/>
                         <SupplyChain_Dashboard_Chip />
                     </div>
                 </TabPanel>
                 <TabPanel value="2">
                     <>
-                    <Products />
+                        <Inventory />
                     </>
                 </TabPanel>
                 <TabPanel value="3">
                     <>
-                    <Products_Discount />
+                        <Products_Discount />
+                    </>
+                </TabPanel>
+                <TabPanel value="6">
+                    <>
+                        <Suppliers />
                     </>
                 </TabPanel>
                 </TabContext>

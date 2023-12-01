@@ -5,14 +5,14 @@ import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIc
 import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
-import { useSelection } from '../../hooks/use-selection';
-import { ProductsTable } from './ProductsTables';
-import { AddProductDialogBox } from '../statelessViews';
-import { AddProducts } from './AddProducts';
-import { listProducts } from '../../actions/productActions';
-import { useTheme, createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSelection } from '../../../../hooks/use-selection';
+import { ProductsTable } from '../../ProductsTables';
+import { AddProductDialogBox } from '../../../statelessViews';
+import { getInventory } from '../../../../actions/supplyChainActions';
+import { InventoryTable } from './InventoryTables';
+import { AddInventory } from './AddInventory';
 
-const Products = () => {
+const Inventory = () => {
     const dispatch = useDispatch();
 
     const [page, setPage] = useState(0);
@@ -24,11 +24,11 @@ const Products = () => {
     setShowAddProductsForm(!showAddProductsForm)
   }
 
-  const productList = useSelector(state => state.productList)
-  const { products } = productList
-
+  const inventoryList = useSelector(state => state.inventoryList)
+  const {inventory} = inventoryList
+  debugger;
   useEffect(() => {
-    dispatch(listProducts())
+    dispatch(getInventory())
   }, [dispatch])
 
   return (
@@ -37,10 +37,10 @@ const Products = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          py: 12
+          /* py: 2 */
         }}
       >
-        <Container>
+        <Container maxWidth="lg">
           <Stack spacing={3}>
             <Stack
               direction="row"
@@ -49,7 +49,7 @@ const Products = () => {
             >
               <Stack spacing={1} direction="row">
                 <Typography variant="h4">
-                  Products
+                  Inventory
                 </Typography>
 
                 {/* TO DO : Alignment needs to be fixed after adding the Search Bar */}
@@ -92,7 +92,7 @@ const Products = () => {
                   variant="contained"
                   onClick={handleAddAndSave}
                 >
-                  {showAddProductsForm ? "Save" : "Add"}
+                  {showAddProductsForm ? "Save" : "Stock In"}
                 </Button>
               </div>
             </Stack>
@@ -100,11 +100,11 @@ const Products = () => {
             {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
-                <AddProducts products={products}/> 
+                <AddInventory products={inventory}/> 
                 : 
-                <ProductsTable
-                    count={products?.length}
-                    items={products}
+                <InventoryTable
+                    count={inventory?.length}
+                    items={inventory}
                     //onDeselectAll={customersSelection.handleDeselectAll}
                     //onDeselectOne={customersSelection.handleDeselectOne}
                     //onPageChange={handlePageChange}
@@ -118,8 +118,8 @@ const Products = () => {
           </Stack>
         </Container>
       </Box>
-      </>
+    </>
   )
 }
 
-export default Products
+export default Inventory

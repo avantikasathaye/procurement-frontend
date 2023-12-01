@@ -18,9 +18,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { brandKit } from '../theme/colors';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import SimpleBar from 'simplebar-react';
 import Select from '@mui/material/Select';
@@ -31,17 +29,10 @@ import FormControl from '@mui/material/FormControl';
 import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import ArrowRight from '@mui/icons-material/ArrowRight';
-import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
-import Home from '@mui/icons-material/Home';
-import Settings from '@mui/icons-material/Settings';
 import People from '@mui/icons-material/People';
 import PermMedia from '@mui/icons-material/PermMedia';
 import Dns from '@mui/icons-material/Dns';
@@ -720,6 +711,92 @@ export const Products_Discount = () => {
   )
 }
 
+export const SupplyChain_Add_Suppliers = (props) => {
+
+  return(
+      <>
+            <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+              <div>
+                
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item>
+                    <TypoTextGridItem title="First Name"/>
+                     </Grid>
+
+                     <Grid item>
+                    <TypoTextGridItem title="Last Name"/>
+                     </Grid>
+
+
+                     <Grid item>
+                        <Typography variant='subtitle2'>Status</Typography>
+                        <TextField
+                          id="outlined-select-status"
+                          select
+                          defaultValue=""
+                        >
+                          {dummyData.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))}
+                        </TextField>
+                    </Grid>
+                </Grid>    
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                    spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      <Grid item>
+                      <TypoTextGridItem title="Start Date"/>
+                     </Grid>
+                      <Grid item>
+                      <TypoTextGridItem title="End Date"/>
+                     </Grid>
+                  </Grid>
+                  <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      <Grid item>
+                            <Typography variant='subtitle2'>Discount Type</Typography>
+                            <TextField
+                              id="outlined-select-discount-type"
+                              select
+                              defaultValue=""
+                            >
+                              {dummyData.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </MenuItem>
+                              ))}
+                            </TextField>
+                        </Grid>
+                  <Grid item>
+                    <Typography variant='subtitle2'>Amount</Typography>
+                    <TextField
+                      id="outlined-select-unitType"
+                      select
+                      defaultValue=""
+                    >
+                      {dummyData.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Grid>
+                </Grid>
+              </div>
+          </Box>
+    </>
+  )
+}
+
 export const SupplyChain_Dashboard = (props) => {
 
   const theme = useTheme();
@@ -744,12 +821,12 @@ export const SupplyChain_Dashboard = (props) => {
   )
 }
 
-export const SupplyChain_Dashboard_UpdatesCard = () => {
+export const SupplyChain_Dashboard_UpdatesCard = (props) => {
 
   const data = [
     { icon: <People />, label: 'Supplies', count: "0" },
     { icon: <Dns />, label: 'Raw materials', count: "0" },
-    { icon: <PermMedia />, label: 'Product', count: "0" },
+    { icon: <PermMedia />, label: 'Product', count: props.totalProducts },
     { icon: <Public />, label: 'Open Order', count: "0" },
   ];
 
