@@ -252,6 +252,27 @@ const dummyData = [
   },
 ];
 
+const productTypes = [
+  {
+    value: 'Instruments',
+    label: 'Instruments',
+  },
+  {
+    value: 'Medicines',
+    label: 'Medicines',
+  },
+  {
+    value: 'Consumables',
+    label: 'Consumables',
+  },
+  {
+    value: 'Equipments',
+    label: 'Equipments',
+  },
+];
+
+
+
 
 const TypoTextGridItem = ({title, defaultValue, onChange}) => {
   var id = "outlined-"+ title.toLowerCase().replace(" ", "") + "-input"
@@ -728,46 +749,31 @@ export const SupplyChain_Add_Suppliers = (props) => {
                 <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                       spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     <Grid item>
-                    <TypoTextGridItem title="First Name"/>
+                    <TypoTextGridItem title="First Name" defaultValue={localStorage.getItem("firstName")} 
+                                            onChange={(e) => props.tempSaveFirstName(e.target.value)}/>
                      </Grid>
 
                      <Grid item>
-                    <TypoTextGridItem title="Last Name"/>
+                    <TypoTextGridItem title="Last Name" defaultValue={localStorage.getItem("lastName")} 
+                                            onChange={(e) => props.tempSaveLastName(e.target.value)}/>
                      </Grid>
 
-
                      <Grid item>
-                        <Typography variant='subtitle2'>Status</Typography>
-                        <TextField
-                          id="outlined-select-status"
-                          select
-                          defaultValue=""
-                        >
-                          {dummyData.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                    </Grid>
+                      <TypoTextGridItem title="Company Name" defaultValue={localStorage.getItem("companyName")} 
+                                            onChange={(e) => props.tempSaveCompanyName(e.target.value)}/>
+                     </Grid>
                 </Grid>    
+
                 <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                     spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                      <Grid item>
-                      <TypoTextGridItem title="Start Date"/>
-                     </Grid>
-                      <Grid item>
-                      <TypoTextGridItem title="End Date"/>
-                     </Grid>
-                  </Grid>
-                  <Grid container wrap='no-wrap' justifyContent={'space-around'} 
-                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                      <Grid item>
-                            <Typography variant='subtitle2'>Discount Type</Typography>
+                     
+                        <Grid item>
+                            <Typography variant='subtitle2'>Supplier Type</Typography>
                             <TextField
                               id="outlined-select-discount-type"
                               select
-                              defaultValue=""
+                              defaultValue={localStorage.getItem("supplierType")} 
+                              onChange={(e) => props.tempSaveSupplierType(e.target.value)}
                             >
                               {dummyData.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
@@ -776,20 +782,58 @@ export const SupplyChain_Add_Suppliers = (props) => {
                               ))}
                             </TextField>
                         </Grid>
-                  <Grid item>
-                    <Typography variant='subtitle2'>Amount</Typography>
-                    <TextField
-                      id="outlined-select-unitType"
-                      select
-                      defaultValue=""
-                    >
-                      {dummyData.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
+
+                     <Grid item>
+                      <TypoTextGridItem title="Email" defaultValue={localStorage.getItem("email")} 
+                                            onChange={(e) => props.tempSaveEmail(e.target.value)}/>
+                     </Grid>
+
+                     <Grid item>
+                      <TypoTextGridItem title="City" defaultValue={localStorage.getItem("city")} 
+                                            onChange={(e) => props.tempSaveCity(e.target.value)}/>
+                     </Grid>
                   </Grid>
+                  
+                 
+
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+                    <Grid item>
+                      <TypoTextGridItem title="State" defaultValue={localStorage.getItem("state")} 
+                                            onChange={(e) => props.tempSaveState(e.target.value)}/>
+                     </Grid>
+
+                     <Grid item>
+                      <TypoTextGridItem title="Contact Number" defaultValue={localStorage.getItem("contactNumber")} 
+                                            onChange={(e) => props.tempSaveContactNumber(e.target.value)}/>
+                     </Grid>
+
+                     <Grid item>
+                      <TypoTextGridItem title="GST Number" defaultValue={localStorage.getItem("gstNumber")} 
+                                            onChange={(e) => props.tempSaveGSTNumber(e.target.value)}/>
+                     </Grid>
+                </Grid>
+
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+
+                        <Grid item>
+                            <Typography variant='subtitle2'>Product Type</Typography>
+                            <TextField
+                              id="outlined-select-discount-type"
+                              select
+                              defaultValue={localStorage.getItem("productType")} 
+                              onChange={(e) => props.tempSaveProductType(e.target.value)}
+                            >
+                              {productTypes.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </MenuItem>
+                              ))}
+                            </TextField>
+                        </Grid>
+                    
                 </Grid>
               </div>
           </Box>

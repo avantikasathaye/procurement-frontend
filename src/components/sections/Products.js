@@ -40,7 +40,7 @@ const Products = () => {
           py: 12
         }}
       >
-        <Container>
+        <Container maxWidth={'lg'}>
           <Stack spacing={3}>
             <Stack
               direction="row"

@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, {useEffect, useState}from 'react';
 import {
   Avatar,
   Box,
@@ -20,8 +20,12 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Scrollbar, Products_Discount, Products_PriceDetails, Products_ProductDetails, SupplyChain_Add_Suppliers } from '../../../statelessViews';
+import { useDispatch } from 'react-redux';
 
 export const AddSuppliers = (props) => {
+
+  const dispatch = useDispatch();
+
   const {
     count = 0,
     items = [],
@@ -42,6 +46,10 @@ export const AddSuppliers = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    
+  })
 
   
   const [firstName, setFirstName] = useState("")

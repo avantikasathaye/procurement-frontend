@@ -8,7 +8,7 @@ import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/materia
 import { useSelection } from '../../../../hooks/use-selection';
 import { SuppliersTable } from './SuppliersTable';
 import { AddSuppliers } from './AddSuppliers';
-import { getAllSuppliers } from '../../../../actions/supplierActions';
+import { getAllSuppliers } from '../../../../actions/supplyChainActions';
 
 const Suppliers = () => {
     const dispatch = useDispatch();
