@@ -17,6 +17,7 @@ import { SideNavItem } from './SideNavItem';
 import { brandKit } from '../../theme/colors';
 import { black } from '@mui/material/colors';
 import { useLocation } from 'react-router-dom';
+import ResponsiveSubDrawer from './ResponsiveSubDrawer';
 
 const drawerWidth = 240;
 
@@ -119,6 +120,7 @@ export default function MiniDrawer ({children}){
     <ThemeProvider theme={mytheme}>
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
+      {/* <ResponsiveSubDrawer /> */}
       <AppBar position="fixed" open={open} >
         <Toolbar>
           <IconButton
@@ -165,6 +167,7 @@ export default function MiniDrawer ({children}){
        {/*  <Divider /> */}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1}}>
+       
         {children}
       </Box>
     </Box>

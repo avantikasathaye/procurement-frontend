@@ -20,7 +20,9 @@ const Suppliers = () => {
 
   const handleAddAndSave = () => {
     setShowAddProductsForm(!showAddProductsForm)
+  }
 
+  const handleSaveSupplier = () => {
     const newSupplierData = {
       "name": localStorage.getItem("name"),
       "companyName" : localStorage.getItem("companyName"),
@@ -32,7 +34,7 @@ const Suppliers = () => {
       "productType": localStorage.getItem("productType"),
       "state": localStorage.getItem("state")
     }
-    debugger;
+
     dispatch(addNewSupplier(newSupplierData));
   }
 
@@ -47,7 +49,6 @@ const Suppliers = () => {
     dispatch(getAllSupplierTypes())
   }, [dispatch])
 
-  debugger;
 
   return (
     <>
@@ -101,7 +102,7 @@ const Suppliers = () => {
                 </Stack>
               </Stack>
               <div>
-                <Button
+              {!showAddProductsForm && <Button
                   startIcon={(
                     <SvgIcon fontSize="small">
                       <PlusIcon />
@@ -110,15 +111,26 @@ const Suppliers = () => {
                   variant="contained"
                   onClick={handleAddAndSave}
                 >
-                  {showAddProductsForm ? "Save" : "Add Supplier"}
-                </Button>
+                  Add Supplier
+                </Button>}
+                {showAddProductsForm && <Button
+                  startIcon={(
+                    <SvgIcon fontSize="small">
+                      <PlusIcon />
+                    </SvgIcon>
+                  )}
+                  variant="contained"
+                  onClick={handleSaveSupplier}
+                >
+                  Save
+                </Button>}
               </div>
             </Stack>
             
             {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
-                <AddSuppliers products={allSuppliers} onAdd={handleAddAndSave} supplierTypes={allSupplierTypes}/> 
+                <AddSuppliers products={allSuppliers} onAdd={handleSaveSupplier} supplierTypes={allSupplierTypes}/> 
                 : 
                 <SuppliersTable
                     count={allSuppliers?.length}
