@@ -20,7 +20,9 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Scrollbar, Products_Discount, Products_PriceDetails, Products_ProductDetails, SupplyChain_Add_Suppliers } from '../../../statelessViews';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {  getAllSupplierTypes } from '../../../../actions/supplyChainActions';
 
 export const AddSuppliers = (props) => {
 
@@ -46,14 +48,10 @@ export const AddSuppliers = (props) => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  useEffect(() => {
-    
-  })
+  
 
   
   const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
   const [supplierType, setSupplierType] = useState("")
   const [companyName, setCompanyName] = useState("")
   const [gstNumber, setGstNumber] = useState("")
@@ -70,14 +68,9 @@ export const AddSuppliers = (props) => {
     localStorage.setItem('brandName', brname)
   }
 
-  const tempSaveFirstName = (firstName) => {
+  const tempSaveName = (name) => {
     setFirstName(firstName)
-    localStorage.setItem("firstName", firstName)
-  }
-
-  const tempSaveLastName = (lastName) => {
-    setLastName(lastName)
-    localStorage.setItem("lastName", lastName)
+    localStorage.setItem("name", name)
   }
 
 
@@ -121,64 +114,19 @@ export const AddSuppliers = (props) => {
     localStorage.setItem("companyName", companyName)
   }
 
-
   return (
     <div style={{display: "flex", flexDirection: "row"}}>
-    {/* <Card style={{marginRight: "20px"}}>
-        <Box sx={{ minWidth: 300 }}>
-        <TabContext value={value}>
-          <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', 
-                    height: "auto" , width: "min-content"}}>
-            <Tabs
-              orientation="vertical"
-              value={value} 
-              onChange={handleChange}
-              indicatorColor='white'
-              textColor="primary"
-              aria-label="secondary tabs example"
-              initialselectedindex={value}
-              centered
-            >
-              <Tab value="1" label="Supplier Details" />
-            </Tabs>
-          </Box>
-          </TabContext>
-        </Box>
-      
-    </Card> */}
-    <Card style={{minWidth: 1000}}>
+    <Card style={{minWidth: 1000}}> 
       <Scrollbar>
-        <Box >
-
-        <SupplyChain_Add_Suppliers props={props} handleStateChanges={handleStateChanges} tempSaveFirstName={tempSaveFirstName}
-                          tempSaveLastName={tempSaveLastName} tempSaveSupplierType={tempSaveSupplierType} 
+        <Box>
+        <SupplyChain_Add_Suppliers props={props} handleStateChanges={handleStateChanges} tempSaveName={tempSaveName} 
+                          tempSaveSupplierType={tempSaveSupplierType} 
                           tempSaveEmail={tempSaveEmail} tempSaveCity={tempSaveCity} tempSaveState={tempSaveState}
                           tempSaveContactNumber={tempSaveContactNumber} tempSaveProductType={tempSaveProductType}
-                          tempSaveGSTNumber={tempSaveGSTNumber} tempSaveCompanyName={tempSaveCompanyName}/>
-             
-       {/*  <TabContext value={value}>
-          <TabPanel value="1">
-              <>
-              <SupplyChain_Add_Suppliers props={props} handleStateChanges={handleStateChanges} tempSaveFirstName={tempSaveFirstName}
-                          tempSaveLastName={tempSaveLastName} tempSaveSupplierType={tempSaveSupplierType} 
-                          tempSaveEmail={tempSaveEmail} tempSaveCity={tempSaveCity} tempSaveState={tempSaveState}
-                          tempSaveContactNumber={tempSaveContactNumber} tempSaveProductType={tempSaveProductType}
-                          tempSaveGSTNumber={tempSaveGSTNumber} tempSaveCompanyName={tempSaveCompanyName}/>
-              </>
-          </TabPanel>
-         
-          </TabContext> */}
+                          tempSaveGSTNumber={tempSaveGSTNumber} tempSaveCompanyName={tempSaveCompanyName} onClickAdd={props.onAdd}
+                          allSupplierTypes = {props.supplierTypes}/>
         </Box>
       </Scrollbar>
-      {/* <TablePagination
-        component="div"
-        count={count}
-        onPageChange={onPageChange}
-        onRowsPerPageChange={onRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      /> */}
     </Card>
     </div>
   );

@@ -3,12 +3,13 @@ import {legacy_createStore as createStore} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer } from "./reducers/productReducers"
-import { allSuppliersListReducer, inventoryListReducer } from "./reducers/supplyChainReducers"
+import { allSupplierTypesReducer, allSuppliersListReducer, inventoryListReducer } from "./reducers/supplyChainReducers"
 
 const reducer = combineReducers({
     productList: productListReducer,
     inventoryList: inventoryListReducer,
-    allSuppliersList: allSuppliersListReducer
+    allSuppliersList: allSuppliersListReducer,
+    allSupplierTypes: allSupplierTypesReducer
     
 })
 

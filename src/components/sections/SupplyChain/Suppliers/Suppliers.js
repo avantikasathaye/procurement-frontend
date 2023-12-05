@@ -8,7 +8,7 @@ import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/materia
 import { useSelection } from '../../../../hooks/use-selection';
 import { SuppliersTable } from './SuppliersTable';
 import { AddSuppliers } from './AddSuppliers';
-import { getAllSuppliers } from '../../../../actions/supplyChainActions';
+import { addNewSupplier, getAllSuppliers, getAllSupplierTypes } from '../../../../actions/supplyChainActions';
 
 const Suppliers = () => {
     const dispatch = useDispatch();
@@ -20,14 +20,34 @@ const Suppliers = () => {
 
   const handleAddAndSave = () => {
     setShowAddProductsForm(!showAddProductsForm)
+
+    const newSupplierData = {
+      "name": localStorage.getItem("name"),
+      "companyName" : localStorage.getItem("companyName"),
+      "supplierType": localStorage.getItem("supplierType"),
+      "email": localStorage.getItem("email"),
+      "city": localStorage.getItem("state"),
+      "contactNumber": localStorage.getItem("contactNumber"),
+      "gstNumber": localStorage.getItem("gstNumber"),
+      "productType": localStorage.getItem("productType"),
+      "state": localStorage.getItem("state")
+    }
+    debugger;
+    dispatch(addNewSupplier(newSupplierData));
   }
 
   const allSuppliersList = useSelector(state => state.allSuppliersList)
   const {allSuppliers} = allSuppliersList
-  debugger;
+
+  const supplierTypes = useSelector(state => state.allSupplierTypes)
+    const {allSupplierTypes} = supplierTypes
+  
   useEffect(() => {
     dispatch(getAllSuppliers())
+    dispatch(getAllSupplierTypes())
   }, [dispatch])
+
+  debugger;
 
   return (
     <>
@@ -38,7 +58,7 @@ const Suppliers = () => {
           /* py: 2 */
         }}
       >
-        <Container maxWidth="lg">
+        <Container style={{width: "fit-content"}}>
           <Stack spacing={3}>
             <Stack
               direction="row"
@@ -98,7 +118,7 @@ const Suppliers = () => {
             {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
-                <AddSuppliers products={allSuppliers}/> 
+                <AddSuppliers products={allSuppliers} onAdd={handleAddAndSave} supplierTypes={allSupplierTypes}/> 
                 : 
                 <SuppliersTable
                     count={allSuppliers?.length}

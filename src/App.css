@@ -15,7 +15,10 @@
 
 .css-1oqqzyl-MuiContainer-root{
   max-width: none !important;
+  margin-left: unset !important; 
 }
+
+
 
 .App-header {
   background-color: #282c34;
