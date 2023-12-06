@@ -6,7 +6,9 @@ import UserIcon from '@heroicons/react/24/solid/UserIcon';
 import UserPlusIcon from '@heroicons/react/24/solid/UserPlusIcon';
 import UsersIcon from '@heroicons/react/24/solid/UsersIcon';
 import XCircleIcon from '@heroicons/react/24/solid/XCircleIcon';
+import { RectangleOutlined, RectangleSharp } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
+import TableViewIcon from '@mui/icons-material/TableView';
 
 export const items = [
   {
@@ -19,20 +21,11 @@ export const items = [
     )
   },
   {
-    title: 'Customers',
-    path: '/customers',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UsersIcon />
-      </SvgIcon>
-    )
-  },
-  {
     title: 'Products',
     path: '/products',
     icon: (
       <SvgIcon fontSize="small">
-        <UsersIcon />
+        <TableViewIcon />
       </SvgIcon>
     )
   },

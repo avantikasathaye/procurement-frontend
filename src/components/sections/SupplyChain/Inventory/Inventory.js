@@ -6,7 +6,7 @@ import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
 import { useSelection } from '../../../../hooks/use-selection';
-import { ProductsTable } from '../../ProductsTables';
+import { ProductsTable } from '../../Products/ProductsTables';
 import { AddProductDialogBox } from '../../../statelessViews';
 import { getInventory } from '../../../../actions/supplyChainActions';
 import { InventoryTable } from './InventoryTables';

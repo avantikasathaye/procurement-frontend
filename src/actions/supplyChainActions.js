@@ -2,6 +2,7 @@ import axios from "axios"
 import { BASE_URL } from "../constants/commonConstants"
 import { INVENTORY_LIST_FAILURE, INVENTORY_LIST_REQUEST, INVENTORY_LIST_SUCCESS, SUPPLIER_TYPES_FAILURE, SUPPLIER_TYPES_REQUEST, SUPPLIER_TYPES_SUCCESS } from "../constants/supplyChainConstants"
 import { ADD_NEW_SUPPLIER_FAILURE, ADD_NEW_SUPPLIER_REQUEST, ADD_NEW_SUPPLIER_SUCCESS, ALL_SUPPLIERS_LIST_FAILURE, ALL_SUPPLIERS_LIST_REQUEST, ALL_SUPPLIERS_LIST_SUCCESS } from "../constants/supplierConstants"
+import { removeLocalStorageItems } from './commonActions'
 
 export const getInventory = () => async (dispatch) => {
     debugger;
@@ -70,6 +71,7 @@ export const addNewSupplier = (supplierData) => async(dispatch) => {
         })
 
         removeLocalStorageItems(supplierData)
+        
     }catch(error){
         dispatch({
             type: ADD_NEW_SUPPLIER_FAILURE,
@@ -80,12 +82,7 @@ export const addNewSupplier = (supplierData) => async(dispatch) => {
     }
 }
 
-const removeLocalStorageItems = (dataToBeRemoved) => {
-    debugger;
-    Object.keys(dataToBeRemoved).forEach((item) => {
-        localStorage.removeItem(item);
-    })
-}
+
 
 export const getAllSupplierTypes = () => async (dispatch) => {
     try{

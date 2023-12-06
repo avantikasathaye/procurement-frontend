@@ -5,11 +5,11 @@ import ArrowDownOnSquareIcon from '@heroicons/react/24/solid/ArrowDownOnSquareIc
 import ArrowUpOnSquareIcon from '@heroicons/react/24/solid/ArrowUpOnSquareIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
 import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/material';
-import { useSelection } from '../../hooks/use-selection';
+import { useSelection } from '../../../hooks/use-selection';
 import { ProductsTable } from './ProductsTables';
-import { AddProductDialogBox } from '../statelessViews';
+import { AddProductDialogBox } from '../../statelessViews';
 import { AddProducts } from './AddProducts';
-import { listProducts } from '../../actions/productActions';
+import { addNewProduct, listProducts } from '../../../actions/productActions';
 import { useTheme, createTheme, ThemeProvider } from '@mui/material/styles';
 
 const Products = () => {
@@ -22,6 +22,21 @@ const Products = () => {
 
   const handleAddAndSave = () => {
     setShowAddProductsForm(!showAddProductsForm)
+  }
+
+  const handleSaveProduct = () => {
+    const newProductData = {
+      "brand": localStorage.getItem("brandName"),
+      "category" : localStorage.getItem("category"),
+      "name": localStorage.getItem("name"),
+      "modelNumber": localStorage.getItem("modelNumber"),
+      "oem": localStorage.getItem("oem"),
+      "hsnCode": localStorage.getItem("hsnCode"),
+      "unitRate": localStorage.getItem("unitRate"),
+      "gst": localStorage.getItem("gst")
+    }
+
+    dispatch(addNewProduct(newProductData));
   }
 
   const productList = useSelector(state => state.productList)
@@ -83,24 +98,43 @@ const Products = () => {
                 </Stack>
               </Stack>
               <div>
-                <Button
-                  startIcon={(
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  )}
-                  variant="contained"
-                  onClick={handleAddAndSave}
-                >
-                  {showAddProductsForm ? "Save" : "Add"}
-                </Button>
+                {showAddProductsForm && <Button
+                    variant="outlined"
+                    onClick={() => setShowAddProductsForm(!showAddProductsForm)}
+                    style={{marginRight: "10px"}}
+                  >
+                    Cancel
+                  </Button>}
+                  
+                {!showAddProductsForm && <Button
+                    startIcon={(
+                      <SvgIcon fontSize="small">
+                        <PlusIcon />
+                      </SvgIcon>
+                    )}
+                    variant="contained"
+                    onClick={handleAddAndSave}
+                  >
+                    Add Product
+                  </Button>}
+                  {showAddProductsForm && <Button
+                    startIcon={(
+                      <SvgIcon fontSize="small">
+                        <PlusIcon />
+                      </SvgIcon>
+                    )}
+                    variant="contained"
+                    onClick={handleSaveProduct}
+                  >
+                    Save Product
+                  </Button>}
               </div>
             </Stack>
             
             {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
-                <AddProducts products={products}/> 
+                <AddProducts products={products} onAdd={handleSaveProduct} /> 
                 : 
                 <ProductsTable
                     count={products?.length}

@@ -13,7 +13,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-import { Scrollbar } from '../statelessViews';
+import { Scrollbar } from '../../statelessViews';
 
 export const ProductsTable = (props) => {
   const {
@@ -60,10 +60,13 @@ export const ProductsTable = (props) => {
                   Category
                 </TableCell>
                 <TableCell>
+                  Batch No
+                </TableCell>
+                <TableCell>
                   Name
                 </TableCell>
                 <TableCell>
-                  Model No
+                  Manufacturer
                 </TableCell>
                 <TableCell>
                   OEM
@@ -72,17 +75,20 @@ export const ProductsTable = (props) => {
                   HSN Code
                 </TableCell>
                 <TableCell>
-                  Sales Rate
+                  Unit Rate
                 </TableCell>
                 <TableCell>
                   GST (%)
                 </TableCell>
                 <TableCell>
+                  Total Rate (Inc. GST)
+                </TableCell>
+               {/*  <TableCell>
                 Unit Rate (Inc. GST)
                 </TableCell>
                 <TableCell>
                 Unit Rate (Exc. GST)
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -124,10 +130,13 @@ export const ProductsTable = (props) => {
                       {customer.category}
                     </TableCell>
                     <TableCell>
+                      {customer.modelNumber}
+                    </TableCell>
+                    <TableCell>
                       {customer.name}
                     </TableCell>
                     <TableCell>
-                      {customer.modelNumber}
+                      {customer.manufacturer}
                     </TableCell>
                     <TableCell>
                       {customer.oem}
@@ -142,11 +151,14 @@ export const ProductsTable = (props) => {
                       {customer.gst}
                     </TableCell>
                     <TableCell>
+                      {customer.totalRate}
+                    </TableCell>
+                   {/*  <TableCell>
                       {customer.unitRateExcGST}
                     </TableCell>
                     <TableCell>
                       {customer.unitRateIncGST}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}
