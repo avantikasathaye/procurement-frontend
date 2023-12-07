@@ -76,7 +76,7 @@ const Login = () => {
               spacing={1}
               sx={{ mb: 3 }}
             >
-              <Typography variant="h4">
+              <Typography variant="h4" >
                 Login
               </Typography>
               <Typography
@@ -95,47 +95,42 @@ const Login = () => {
                 </Link>
               </Typography>
             </Stack>
-            <Tabs
-              onChange={handleMethodChange}
-              sx={{ mb: 3 }}
-              value={method}
-            >
-              <Tab
-                label="Email"
-                value="email"
-              />
-             {/*  <Tab
-                label="Phone Number"
-                value="phoneNumber"
-              /> */}
-            </Tabs>
+           
             {method === 'email' && (
               <form
                 noValidate
                 onSubmit={formik.handleSubmit}
               >
                 <Stack spacing={3}>
+                    <Typography variant="subtitle2" >
+                        Email Address *
+                    </Typography>
                   <TextField
                     error={!!(formik.touched.email && formik.errors.email)}
                     fullWidth
                     helperText={formik.touched.email && formik.errors.email}
-                    label="Email Address"
+                    /* label="Email Address" */
                     name="email"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     type="email"
                     value={formik.values.email}
+                    style={{backgroundColor: "#E5FEF2"}}
                   />
+                  <Typography variant="subtitle2" >
+                        Password *
+                    </Typography>
                   <TextField
                     error={!!(formik.touched.password && formik.errors.password)}
                     fullWidth
                     helperText={formik.touched.password && formik.errors.password}
-                    label="Password"
+                    /* label="Password" */
                     name="password"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                     type="password"
                     value={formik.values.password}
+                    style={{backgroundColor: "#E5FEF2"}}
                   />
                 </Stack>
                 {/* <FormHelperText sx={{ mt: 1 }}>
@@ -153,7 +148,7 @@ const Login = () => {
                 <Button
                   fullWidth
                   size="large"
-                  sx={{ mt: 3 }}
+                  sx={{ mt: 3 , backgroundColor: "#3D808C"}}
                   type="submit"
                   variant="contained"
                 >

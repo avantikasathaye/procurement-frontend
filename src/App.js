@@ -7,17 +7,18 @@ import MiniDrawer from './components/dashboard/mini-drawer';
 import SupplyChain from './components/sections/SupplyChain/SupplyChain';
 import ResponsiveSubDrawer from './components/dashboard/ResponsiveSubDrawer';
 import Login from './screens/Login';
+import AuthLayout from './screens/AuthLayout';
 
 function App() {
   return (
     <BrowserRouter>
-    <MiniDrawer>
+    
       <Routes>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/products" element={<Products />} />
-          <Route path="/supply-chain" element={<SupplyChain />}/>
+          <Route path="/login" element={<AuthLayout><Login /></AuthLayout>}/>
+          <Route path="/products" element={<MiniDrawer><Products /></MiniDrawer>} />
+          <Route path="/supply-chain" element={<MiniDrawer><SupplyChain /></MiniDrawer>}/>
       </Routes>
-    </MiniDrawer>
+   {/*  </MiniDrawer> */}
   </BrowserRouter>
   );
 }
