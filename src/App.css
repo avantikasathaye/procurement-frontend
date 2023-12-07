@@ -18,7 +18,14 @@
   margin-left: unset !important; 
 }
 
+.css-hyum1k-MuiToolbar-root{
+  justify-content: space-between !important;
+}
 
+.leftMenuItems{
+  display: flex;
+  align-items: center;
+}
 
 .App-header {
   background-color: #282c34;
