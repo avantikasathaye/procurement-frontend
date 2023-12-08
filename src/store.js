@@ -4,8 +4,10 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer } from "./reducers/productReducers"
 import { allSupplierTypesReducer, allSuppliersListReducer, inventoryListReducer } from "./reducers/supplyChainReducers"
+import { loginReducer } from "./reducers/userReducers"
 
 const reducer = combineReducers({
+    login: loginReducer,
     productList: productListReducer,
     inventoryList: inventoryListReducer,
     allSuppliersList: allSuppliersListReducer,

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -13,10 +13,16 @@ import {
   TextField,
   Typography
 } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOTP, login } from '../actions/userActions';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     
   const [method, setMethod] = useState('email');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
           email: 'sample@gmail.com',
@@ -29,12 +35,14 @@ const Login = () => {
             .email('Must be a valid email')
             .max(255)
             .required('Email is required'),
-          password: Yup
+          otp: Yup
             .string()
             .max(255)
-            .required('Password is required')
+            .required('OTP is required')
         }),
-        
+        onSubmit: async (values, helpers) => {
+            dispatch(login(values.email, values.otp))
+          }
       });
     
       const handleMethodChange = useCallback(
@@ -52,6 +60,16 @@ const Login = () => {
         [auth, router]
       ); */
 
+      /* const login = useSelector(state => state.login)
+      const {loading, error, userInfo} = login
+
+      useEffect(() => {
+        if(userInfo){
+            debugger;
+            navigate('/products');
+        }
+      })
+ */
   return (
     <div>
         <Box
@@ -105,31 +123,42 @@ const Login = () => {
                     <Typography variant="subtitle2" >
                         Email Address *
                     </Typography>
-                  <TextField
-                    error={!!(formik.touched.email && formik.errors.email)}
-                    fullWidth
-                    helperText={formik.touched.email && formik.errors.email}
-                    /* label="Email Address" */
-                    name="email"
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    type="email"
-                    value={formik.values.email}
-                    style={{backgroundColor: "#E5FEF2"}}
-                  />
+                    <TextField
+                        error={!!(formik.touched.email && formik.errors.email)}
+                        fullWidth
+                        helperText={formik.touched.email && formik.errors.email}
+                        /* label="Email Address" */
+                        name="email"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        type="email"
+                        value={formik.values.email}
+                        style={{backgroundColor: "#E5FEF2"}}
+                    />
+                    <Button
+                        fullWidth
+                        size="large"
+                        sx={{ mt: 3 , backgroundColor: "#3D808C"}}
+                        variant="contained"
+                        onClick={() => dispatch(getOTP(formik.values.email))}
+                        >
+                        Get OTP
+                    </Button>
+
+
                   <Typography variant="subtitle2" >
-                        Password *
+                        OTP *
                     </Typography>
                   <TextField
-                    error={!!(formik.touched.password && formik.errors.password)}
+                    error={!!(formik.touched.otp && formik.errors.otp)}
                     fullWidth
-                    helperText={formik.touched.password && formik.errors.password}
+                    helperText={formik.touched.otp && formik.errors.otp}
                     /* label="Password" */
-                    name="password"
+                    name="otp"
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    type="password"
-                    value={formik.values.password}
+                    type="otp"
+                    value={formik.values.otp}
                     style={{backgroundColor: "#E5FEF2"}}
                   />
                 </Stack>

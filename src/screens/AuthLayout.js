@@ -12,7 +12,8 @@ const AuthLayout = (props) => {
       component="main"
       sx={{
         display: 'flex',
-        flex: '1 1 auto'
+        flex: '1 1 auto',
+        marginTop: "20px"
       }}
     >
       <Grid
@@ -48,7 +49,7 @@ const AuthLayout = (props) => {
                 width: 32
               }}
             >
-              <Logo />
+              {/* <Logo /> */}
             </Box>
           </Box>
           {children}
