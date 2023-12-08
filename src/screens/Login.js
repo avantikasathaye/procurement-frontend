@@ -14,7 +14,7 @@ import {
   Typography
 } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOTP, login } from '../actions/userActions';
+import { getOTP, loginUser } from '../actions/userActions';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -26,7 +26,6 @@ const Login = () => {
     const formik = useFormik({
         initialValues: {
           email: 'sample@gmail.com',
-          password: 'Password123!',
           submit: null
         },
         validationSchema: Yup.object({
@@ -40,8 +39,9 @@ const Login = () => {
             .max(255)
             .required('OTP is required')
         }),
-        onSubmit: async (values, helpers) => {
-            dispatch(login(values.email, values.otp))
+        onSubmit: async (values) => {
+            debugger;
+            dispatch(loginUser(values.email, values.otp))
           }
       });
     
@@ -60,7 +60,7 @@ const Login = () => {
         [auth, router]
       ); */
 
-      /* const login = useSelector(state => state.login)
+      const login = useSelector(state => state.login)
       const {loading, error, userInfo} = login
 
       useEffect(() => {
@@ -68,8 +68,8 @@ const Login = () => {
             debugger;
             navigate('/products');
         }
-      })
- */
+      },[userInfo])
+
   return (
     <div>
         <Box
@@ -144,8 +144,6 @@ const Login = () => {
                         >
                         Get OTP
                     </Button>
-
-
                   <Typography variant="subtitle2" >
                         OTP *
                     </Typography>
@@ -181,7 +179,7 @@ const Login = () => {
                   type="submit"
                   variant="contained"
                 >
-                  Continue
+                  Login
                 </Button>
                 {/* <Button
                   fullWidth

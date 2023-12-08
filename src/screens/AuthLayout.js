@@ -76,7 +76,7 @@ const AuthLayout = (props) => {
               sx={{
                 fontSize: '24px',
                 lineHeight: '32px',
-                mb: 1
+                mb: 10
               }}
               variant="h1"
             >

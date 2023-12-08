@@ -26,7 +26,7 @@ export const getOTP = (userEmail) => async(dispatch) => {
     }
 }
 
-export const login = (email, otp) => async (dispatch) => {
+export const loginUser = (email, otp) => async (dispatch) => {
     try{
         dispatch({
             type: USER_LOGIN_REQUEST
