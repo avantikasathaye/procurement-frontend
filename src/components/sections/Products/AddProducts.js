@@ -23,6 +23,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { Scrollbar, Products_Discount, Products_PriceDetails, Products_ProductDetails } from '../../statelessViews';
 import { addNewProduct, listProducts } from '../../../actions/productActions';
 import { useDispatch } from 'react-redux';
+import { useAsyncError } from 'react-router-dom';
 
 
 export const AddProducts = (props) => {
@@ -50,8 +51,8 @@ export const AddProducts = (props) => {
 
   const [brandName, setBrandName] = useState("")
   const [category, setCategory] = useState("")
-  const [name, setName] = useState("")
-  const [modelNumber, setModelNumber] = useState("")
+  const [productName, setProductName] = useState("")
+  const [batchNumber, setBatchNumber] = useState("")
   const [oem, setOem] = useState("")
   const [hsnCode, setHsnCode] = useState("")
   const [unitRate, setUnitRate] = useState("")
@@ -93,9 +94,9 @@ export const AddProducts = (props) => {
     localStorage.setItem("category", category)
   }
 
-  const tempSaveName = (name) => {
-    setCategory(name);
-    localStorage.setItem("name", name)
+  const tempSaveName = (productName) => {
+    setCategory(productName);
+    localStorage.setItem("productName", productName)
   }
 
   const tempSaveOem = (oem) => {
@@ -103,9 +104,9 @@ export const AddProducts = (props) => {
     localStorage.setItem("oem", oem)
   }
 
-  const tempSaveModelNumber = (modelNumber) => {
-    setModelNumber(modelNumber);
-    localStorage.setItem("modelNumber", modelNumber)
+  const tempSaveBatchNumber = (batchNumber) => {
+    setBatchNumber(batchNumber);
+    localStorage.setItem("batchNumber", batchNumber)
   }
 
   const tempSaveHsnCode = (hsnCode) => {
@@ -118,9 +119,9 @@ export const AddProducts = (props) => {
     localStorage.setItem("skuCode", skuCode)
   }
 
-  const tempSaveUnitType = (unitType) => {
-    setUnitType(unitType);
-    localStorage.setItem("unitType", unitType)
+  const tempSaveManufacturer = (manufacturer) => {
+    setUnitType(manufacturer);
+    localStorage.setItem("manufacturer", manufacturer)
   }
 
   const tempSaveSize = (size) => {
@@ -157,7 +158,8 @@ export const AddProducts = (props) => {
     const newProductData = {
       "brand": localStorage.getItem("brandName"),
       "category" : localStorage.getItem("category"),
-      "name": localStorage.getItem("name"),
+      "productName": localStorage.getItem("name"),
+      "manufacturer": localStorage.getItem("manufacturer"),
       "modelNumber": localStorage.getItem("modelNumber"),
       "oem": localStorage.getItem("oem"),
       "hsnCode": localStorage.getItem("hsnCode"),
@@ -200,8 +202,8 @@ export const AddProducts = (props) => {
 
         <Products_ProductDetails props={props} tempSaveBrand={tempSaveBrand} tempSaveCategory={tempSaveCategory}
                     tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
-                    tempSaveModelNumber={tempSaveModelNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
-                    tempSaveUnitType={tempSaveUnitType} tempSaveTags={tempSaveTags} tempSaveWarranty={tempSaveWarranty}
+                    tempSaveBatchNumber={tempSaveBatchNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
+                    tempSaveManufacturer={tempSaveManufacturer} tempSaveWarranty={tempSaveWarranty}
                     tempSaveSpecification={tempSaveSpecification} tempSaveUnitRate={tempSaveUnitRate} 
                     tempSaveGstPercentage={tempSaveGstPercentage} onClickAdd={props.onAdd}/>
 

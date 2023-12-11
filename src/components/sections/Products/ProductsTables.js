@@ -63,7 +63,7 @@ export const ProductsTable = (props) => {
                   Batch No
                 </TableCell>
                 <TableCell>
-                  Name
+                  Product Name
                 </TableCell>
                 <TableCell>
                   Manufacturer

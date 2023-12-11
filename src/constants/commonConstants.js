@@ -21,21 +21,34 @@ export const productTypes = [
 
   export const brandNames = [
     {
-      value: 'Brand1',
-      label: 'Brand1',
+      value: 'Lupin',
+      label: 'Lupin',
     },
     {
-      value: 'Brand2',
-      label: 'Brand2',
+      value: 'Cipla',
+      label: 'Cipla',
     },
     {
-      value: 'Brand3',
-      label: 'Brand3',
+      value: 'Biocon',
+      label: 'Biocon',
     },
     {
-      value: 'Brand4',
-      label: 'Brand4',
+      value: 'Emcure',
+      label: 'Emcure',
     },
+    {
+        value: 'Alembic',
+        label: 'Alembic',
+    },
+    {
+        value: 'JohnsonAndJohnson',
+        label: 'JohnsonAndJohnson',
+    },
+    {
+        value: 'SunPharma',
+        label: 'SunPharma',
+    },
+    
   ];
 
   export const categoryNames = [
