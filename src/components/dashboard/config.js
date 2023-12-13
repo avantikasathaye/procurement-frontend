@@ -36,7 +36,23 @@ export const items = [
       <SvgIcon fontSize="small">
         <ShoppingBagIcon />
       </SvgIcon>
-    )
+    ),
+    children: [
+      {
+        name: "Level 1"
+      },
+      {
+        name: "Level 2",
+        children: [
+          {
+            name: "Level 2.1"
+          },
+          {
+            name: "Level 2.2"
+          }
+        ]
+      }
+    ]
   },
   {
     title: 'Account',

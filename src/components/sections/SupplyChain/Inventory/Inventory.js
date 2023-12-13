@@ -37,7 +37,7 @@ const Inventory = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          /* py: 2 */
+          py: 12
         }}
       >
         <Container maxWidth="lg">

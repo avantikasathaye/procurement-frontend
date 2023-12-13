@@ -56,7 +56,7 @@ const Suppliers = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          /* py: 2 */
+          py: 11
         }}
       >
         <Container style={{width: "fit-content"}}>

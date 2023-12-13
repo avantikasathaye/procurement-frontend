@@ -12,12 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { items } from './config';
-import { SideNavItem } from './SideNavItem';
 import { brandKit } from '../../theme/colors';
-import { black } from '@mui/material/colors';
 import { useLocation } from 'react-router-dom';
-import ResponsiveSubDrawer from './ResponsiveSubDrawer';
 import SemaIcon from '../../assets/LogoSema02.png'
 import PersonIcon from '@mui/icons-material/Person';
 import HelpIcon from '@mui/icons-material/Help';
@@ -25,6 +21,23 @@ import { Button } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Modal from '@mui/material/Modal';
+import Collapse from '@mui/material/Collapse';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ListItemButton from '@mui/material/ListItemButton';
+import { Link } from 'react-router-dom'
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import SendIcon from '@mui/icons-material/Send';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import TuneIcon from '@mui/icons-material/Tune';
+import PeopleIcon from '@mui/icons-material/People';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 const drawerWidth = 240;
 
@@ -148,6 +161,14 @@ export default function MiniDrawer ({children}){
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const [menuOpen, setMenuOpen] = useState(true);
+
+  const handle_Click = ( item ) => {
+   setMenuOpen(!menuOpen)
+  }
+
+  
+
   return (
     <ThemeProvider theme={mytheme}>
     <Box sx={{ display: 'flex' }} >
@@ -228,27 +249,93 @@ export default function MiniDrawer ({children}){
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List >
-          {items.map((item) => {
-            const active = item.path ? (location.pathname === item.path) : false;
-            return(
-                <SideNavItem
-                    active={active}
-                    disabled={item.disabled}
-                    external={item.external}
-                    icon={item.icon}
-                    key={item.title}
-                    path={item.path}
-                    title={item.title}
-                />
-            )
-            
-            })}
-        </List>
+       
+            <List
+                sx={{ width: '100%', maxWidth: 360, bgcolor: brandKit.sideNav }}
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+              >
+                <ListItemButton>
+                  <ListItemIcon><SendIcon /></ListItemIcon>
+                  <ListItemText primary="Overview" />
+                </ListItemButton>
+                
+                <ListItemButton component={Link} to="/products">
+                    <ListItemIcon><DraftsIcon /></ListItemIcon>
+                    <ListItemText primary="Products" />
+                </ListItemButton>
+                
+                <ListItemButton onClick={handle_Click}>
+                  <ListItemIcon><InboxIcon /></ListItemIcon>
+                  <ListItemText primary="Supply Chain" />
+                  {menuOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+                
+                <Collapse in={menuOpen} timeout="auto" unmountOnExit>
+                  <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <DashboardIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Dashboard" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }} component={Link} to="/inventory">
+                      <ListItemIcon>
+                        <InventoryIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Inventory" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <ListAltIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Orders" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <ListAltIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Purchase Orders" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <TuneIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Setup" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }} component={Link} to="/suppliers">
+                      <ListItemIcon>
+                        <PeopleIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Suppliers"/>
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <AssessmentIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Reports" />
+                    </ListItemButton>
+
+                    <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemIcon>
+                        <SummarizeIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Summary" />
+                    </ListItemButton>
+
+                  </List>
+                </Collapse>
+              </List>
+        
        {/*  <Divider /> */}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1}}>
-       
         {children}
       </Box>
     </Box>

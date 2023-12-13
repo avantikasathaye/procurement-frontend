@@ -8,6 +8,8 @@ import SupplyChain from './components/sections/SupplyChain/SupplyChain';
 import ResponsiveSubDrawer from './components/dashboard/ResponsiveSubDrawer';
 import Login from './screens/Login';
 import AuthLayout from './screens/AuthLayout';
+import Inventory from './components/sections/SupplyChain/Inventory/Inventory';
+import Suppliers from './components/sections/SupplyChain/Suppliers/Suppliers';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<AuthLayout><Login /></AuthLayout>}/>
           <Route path="/products" element={<MiniDrawer><Products /></MiniDrawer>} />
           <Route path="/supply-chain" element={<MiniDrawer><SupplyChain /></MiniDrawer>}/>
+          <Route path="/inventory" element={<MiniDrawer><Inventory /></MiniDrawer>}/>
+          <Route path="/suppliers" element={<MiniDrawer><Suppliers /></MiniDrawer>}/>
       </Routes>
    {/*  </MiniDrawer> */}
   </BrowserRouter>
