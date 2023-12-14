@@ -60,9 +60,21 @@ const SupplyChain = () => {
       py: 12
     }}>
         <Container maxWidth="lg">
-       <div style={{display: "flex", flexDirection: "row"}}>
+
+            <>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                        <SupplyChain_Dashboard title="Supplies Approved"/>
+                        <SupplyChain_Dashboard title="Pending"/>
+                        <SupplyChain_Dashboard title="Rejected"/>
+                    </div>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
+                        <SupplyChain_Dashboard_UpdatesCard totalProducts={products.length}/>
+                        <SupplyChain_Dashboard_Chip />
+                    </div>
+            </>
+       {/* <div style={{display: "flex", flexDirection: "row"}}>
         <Card style={{marginRight: "20px"}}>
-           {/*  <Box sx={{ minWidth: 300 }} > */}
+           
             <TabContext value={value} >
             <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: "auto", 
                          width: "min-content" , justifyContent: "flex-start", alignContent: "flex-start"}}>
@@ -88,7 +100,7 @@ const SupplyChain = () => {
                 </Tabs>
             </Box>
             </TabContext>
-            {/* </Box> */}
+            
         </Card>
         <Card style={{minWidth: 1000}}>
             <Scrollbar>
@@ -123,17 +135,8 @@ const SupplyChain = () => {
                 </TabContext>
                 </Box>
             </Scrollbar>
-            {/* <TablePagination
-                component="div"
-                count={count}
-                onPageChange={onPageChange}
-                onRowsPerPageChange={onRowsPerPageChange}
-                page={page}
-                rowsPerPage={rowsPerPage}
-                rowsPerPageOptions={[5, 10, 25]}
-            /> */}
         </Card>
-        </div>
+        </div> */}
     </Container>
     </Box>
   )

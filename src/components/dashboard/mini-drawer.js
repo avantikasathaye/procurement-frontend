@@ -255,17 +255,17 @@ export default function MiniDrawer ({children}){
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                <ListItemButton>
+                {/* <ListItemButton>
                   <ListItemIcon><SendIcon /></ListItemIcon>
                   <ListItemText primary="Overview" />
-                </ListItemButton>
+                </ListItemButton> */}
                 
                 <ListItemButton component={Link} to="/products">
                     <ListItemIcon><DraftsIcon /></ListItemIcon>
                     <ListItemText primary="Products" />
                 </ListItemButton>
                 
-                <ListItemButton onClick={handle_Click}>
+                <ListItemButton onClick={handle_Click} component={Link} to="/supply-chain">
                   <ListItemIcon><InboxIcon /></ListItemIcon>
                   <ListItemText primary="Supply Chain" />
                   {menuOpen ? <ExpandLess /> : <ExpandMore />}
@@ -273,12 +273,12 @@ export default function MiniDrawer ({children}){
                 
                 <Collapse in={menuOpen} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    {/* <ListItemButton sx={{ pl: 4 }}>
                       <ListItemIcon>
                         <DashboardIcon />
                       </ListItemIcon>
                       <ListItemText primary="Dashboard" />
-                    </ListItemButton>
+                    </ListItemButton> */}
 
                     <ListItemButton sx={{ pl: 4 }} component={Link} to="/inventory">
                       <ListItemIcon>
@@ -287,7 +287,7 @@ export default function MiniDrawer ({children}){
                       <ListItemText primary="Inventory" />
                     </ListItemButton>
 
-                    <ListItemButton sx={{ pl: 4 }}>
+                    {/* <ListItemButton sx={{ pl: 4 }}>
                       <ListItemIcon>
                         <ListAltIcon />
                       </ListItemIcon>
@@ -299,7 +299,7 @@ export default function MiniDrawer ({children}){
                         <ListAltIcon />
                       </ListItemIcon>
                       <ListItemText primary="Purchase Orders" />
-                    </ListItemButton>
+                    </ListItemButton> */}
 
                     <ListItemButton sx={{ pl: 4 }}>
                       <ListItemIcon>
