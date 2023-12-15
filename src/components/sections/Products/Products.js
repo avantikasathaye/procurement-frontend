@@ -27,9 +27,11 @@ const Products = () => {
   const handleSaveProduct = () => {
     const newProductData = {
       "brand": localStorage.getItem("brandName"),
+      "productName": localStorage.getItem("productName"),
       "category" : localStorage.getItem("category"),
       "name": localStorage.getItem("name"),
-      "modelNumber": localStorage.getItem("modelNumber"),
+      "batchNumber": localStorage.getItem("batchNumber"),
+      "manufacturer": localStorage.getItem("manufacturer"),
       "oem": localStorage.getItem("oem"),
       "hsnCode": localStorage.getItem("hsnCode"),
       "unitRate": localStorage.getItem("unitRate"),
@@ -130,8 +132,6 @@ const Products = () => {
                   </Button>}
               </div>
             </Stack>
-            
-            {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
                 <AddProducts products={products} onAdd={handleSaveProduct} /> 

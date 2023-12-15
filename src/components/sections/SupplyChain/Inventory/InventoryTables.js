@@ -103,7 +103,7 @@ export const InventoryTable = (props) => {
                       {item.name}
                     </TableCell>
                     <TableCell>
-                      {item.modelNo}
+                      {item.batchNumber}
                     </TableCell>
                     <TableCell>
                       {item.oem}
@@ -118,7 +118,7 @@ export const InventoryTable = (props) => {
                       {item.totalConsumedQuantity}
                     </TableCell>
                     <TableCell>
-                      {item.totalAvailableQuantity}
+                      {item.totalQuantity - item.totalConsumedQuantity}
                     </TableCell>
                   </TableRow>
                 );

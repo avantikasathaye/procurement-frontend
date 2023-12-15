@@ -130,10 +130,10 @@ export const ProductsTable = (props) => {
                       {customer.category}
                     </TableCell>
                     <TableCell>
-                      {customer.modelNumber}
+                      {customer.batchNumber}
                     </TableCell>
                     <TableCell>
-                      {customer.name}
+                      {customer.productName}
                     </TableCell>
                     <TableCell>
                       {customer.manufacturer}

@@ -36,6 +36,7 @@ const Suppliers = () => {
     }
 
     dispatch(addNewSupplier(newSupplierData));
+    
   }
 
   const allSuppliersList = useSelector(state => state.allSuppliersList)

@@ -46,7 +46,7 @@ export const AddInventory = (props) => {
   const [brandName, setBrandName] = useState("")
   const [category, setCategory] = useState("")
   const [name, setName] = useState("")
-  const [modelNumber, setModelNumber] = useState("")
+  const [batchNumber, setBatchNumber] = useState("")
   const [oem, setOem] = useState("")
   const [hsnCode, setHsnCode] = useState("")
   const [salesRate, setSalesRate] = useState("")
@@ -77,18 +77,21 @@ export const AddInventory = (props) => {
   }
 
   const tempSaveName = (name) => {
+    console.log("in tempSaveName")
     setCategory(name);
     localStorage.setItem("name", name)
   }
 
   const tempSaveOem = (oem) => {
+    console.log("in tempSaveOem: " + oem)
+    debugger;
     setOem(oem);
     localStorage.setItem("oem", oem)
   }
 
-  const tempSaveModelNumber = (modelNumber) => {
-    setModelNumber(modelNumber);
-    localStorage.setItem("modelNumber", modelNumber)
+  const tempSaveBatchNumber = (batchNumber) => {
+    setBatchNumber(batchNumber);
+    localStorage.setItem("batchNumber", batchNumber)
   }
 
   const tempSaveHsnCode = (hsnCode) => {
@@ -126,16 +129,22 @@ export const AddInventory = (props) => {
     localStorage.setItem("specification", specification)
   }
 
+  const tempSaveTotalQuantity = (totalQuantity) => {
+    setSpecification(totalQuantity)
+    localStorage.setItem("totalQuantity", totalQuantity)
+  }
+
   return (
     <div style={{display: "flex", flexDirection: "row"}}>
       <Card style={{minWidth: 1000}}>
         <Scrollbar>
           <Box>
-            <Inventory_AddInventory props={props} handleStateChanges={handleStateChanges} tempSaveCategory={tempSaveCategory}
+            <Inventory_AddInventory props={props} products={props.products} handleStateChanges={handleStateChanges} tempSaveCategory={tempSaveCategory}
                       tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
-                      tempSaveModelNumber={tempSaveModelNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
+                      tempSaveBatchNumber={tempSaveBatchNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
                       tempSaveUnitType={tempSaveUnitType} tempSaveTags={tempSaveTags} tempSaveWarranty={tempSaveWarranty}
-                      tempSaveSpecification={tempSaveSpecification}/>
+                      tempSaveSpecification={tempSaveSpecification} tempSaveTotalQuantity={tempSaveTotalQuantity} 
+                      onClickAdd={props.onAdd}/>
           </Box>
         </Scrollbar>
       </Card>

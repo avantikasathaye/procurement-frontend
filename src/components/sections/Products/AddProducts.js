@@ -173,74 +173,20 @@ export const AddProducts = (props) => {
   return (
     <div style={{display: "flex", flexDirection: "row"}}>
     <Card style={{marginRight: "20px"}}>
-        {/* <Box sx={{ minWidth: 300 }}>
-          <TabContext value={value}>
-            <Box sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', 
-                      height: "auto" , width: "min-content"}}>
-              <Tabs
-                orientation="vertical"
-                value={value} 
-                onChange={handleChange}
-                indicatorColor='white'
-                textColor="primary"
-                aria-label="secondary tabs example"
-                initialselectedindex={value}
-                centered
-              >
-                <Tab value="1" label="Product Details" />
-                <Tab value="2" label="Price Details" />
-                <Tab value="3" label="Discount" />
-              </Tabs>
-            </Box>
-          </TabContext>
-        </Box> */}
+        
       
     </Card>
     <Card style={{minWidth: 1000}}>
       <Scrollbar>
         <Box >
-
         <Products_ProductDetails props={props} tempSaveBrand={tempSaveBrand} tempSaveCategory={tempSaveCategory}
                     tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
                     tempSaveBatchNumber={tempSaveBatchNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
                     tempSaveManufacturer={tempSaveManufacturer} tempSaveWarranty={tempSaveWarranty}
                     tempSaveSpecification={tempSaveSpecification} tempSaveUnitRate={tempSaveUnitRate} 
                     tempSaveGstPercentage={tempSaveGstPercentage} onClickAdd={props.onAdd}/>
-
-                    
-        {/* <TabContext value={value}>
-          <TabPanel value="1">
-              <>
-              <Products_ProductDetails props={props} tempSaveBrand={tempSaveBrand} tempSaveCategory={tempSaveCategory}
-                    tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
-                    tempSaveModelNumber={tempSaveModelNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
-                    tempSaveUnitType={tempSaveUnitType} tempSaveTags={tempSaveTags} tempSaveWarranty={tempSaveWarranty}
-                    tempSaveSpecification={tempSaveSpecification} tempSaveUnitRate={tempSaveUnitRate} 
-                    tempSaveGstPercentage={tempSaveGstPercentage} onClickAdd={props.onAdd}/>
-              </>
-          </TabPanel>
-          <TabPanel value="2">
-              <>
-              <Products_PriceDetails />
-              </>
-          </TabPanel>
-          <TabPanel value="3">
-            <>
-            <Products_Discount />
-            </>
-          </TabPanel>
-          </TabContext> */}
         </Box>
       </Scrollbar>
-      {/* <TablePagination
-        component="div"
-        count={count}
-        onPageChange={onPageChange}
-        onRowsPerPageChange={onRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      /> */}
     </Card>
     </div>
   );

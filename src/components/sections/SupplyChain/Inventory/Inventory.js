@@ -8,9 +8,10 @@ import { Box, Button, Container, Stack, SvgIcon, Typography } from '@mui/materia
 import { useSelection } from '../../../../hooks/use-selection';
 import { ProductsTable } from '../../Products/ProductsTables';
 import { AddProductDialogBox } from '../../../statelessViews';
-import { getInventory } from '../../../../actions/supplyChainActions';
+import { addNewInventory, getInventory } from '../../../../actions/supplyChainActions';
 import { InventoryTable } from './InventoryTables';
 import { AddInventory } from './AddInventory';
+import { listProducts } from '../../../../actions/productActions';
 
 const Inventory = () => {
     const dispatch = useDispatch();
@@ -24,11 +25,28 @@ const Inventory = () => {
     setShowAddProductsForm(!showAddProductsForm)
   }
 
+  const handleSaveInventory = () => {
+    const newInventoryData = {
+      "name": localStorage.getItem("name"),
+      "batchNumber": localStorage.getItem("batchNumber"),
+      "oem": localStorage.getItem("oem"),
+      "hsnCode": localStorage.getItem("hsnCode"),
+      "totalQuantity": localStorage.getItem("totalQuantity")
+    }
+
+    dispatch(addNewInventory(newInventoryData));
+  }
+
   const inventoryList = useSelector(state => state.inventoryList)
   const {inventory} = inventoryList
+
+  const productList = useSelector(state => state.productList)
+  const { products } = productList
+  
   debugger;
   useEffect(() => {
     dispatch(getInventory())
+    dispatch(listProducts())
   }, [dispatch])
 
   return (
@@ -53,7 +71,7 @@ const Inventory = () => {
                 </Typography>
 
                 {/* TO DO : Alignment needs to be fixed after adding the Search Bar */}
-               {/*  <CustomersSearch /> */}
+                {/*  <CustomersSearch /> */}
                 
                 <Stack
                   alignItems="center"
@@ -83,24 +101,45 @@ const Inventory = () => {
                 </Stack>
               </Stack>
               <div>
-                <Button
-                  startIcon={(
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  )}
-                  variant="contained"
-                  onClick={handleAddAndSave}
-                >
-                  {showAddProductsForm ? "Save" : "Stock In"}
-                </Button>
+              <div>
+                {showAddProductsForm && <Button
+                    variant="outlined"
+                    onClick={() => setShowAddProductsForm(!showAddProductsForm)}
+                    style={{marginRight: "10px"}}
+                  >
+                    Cancel
+                  </Button>}
+                  
+                {!showAddProductsForm && <Button
+                    startIcon={(
+                      <SvgIcon fontSize="small">
+                        <PlusIcon />
+                      </SvgIcon>
+                    )}
+                    variant="contained"
+                    onClick={handleAddAndSave}
+                  >
+                    Stock In
+                  </Button>}
+                  {showAddProductsForm && <Button
+                    startIcon={(
+                      <SvgIcon fontSize="small">
+                        <PlusIcon />
+                      </SvgIcon>
+                    )}
+                    variant="contained"
+                    onClick={handleSaveInventory}
+                  >
+                    Save Inventory
+                  </Button>}
+              </div>
               </div>
             </Stack>
             
             {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
-                <AddInventory products={inventory}/> 
+                <AddInventory products={products} onAdd={handleSaveInventory}/> 
                 : 
                 <InventoryTable
                     count={inventory?.length}

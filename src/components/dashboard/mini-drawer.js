@@ -39,6 +39,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const drawerWidth = 240;
 
 const mytheme = createTheme({
@@ -264,6 +267,11 @@ export default function MiniDrawer ({children}){
                     <ListItemIcon><DraftsIcon /></ListItemIcon>
                     <ListItemText primary="Products" />
                 </ListItemButton>
+
+                <ListItemButton component={Link} to="/department-requests">
+                    <ListItemIcon><DraftsIcon /></ListItemIcon>
+                    <ListItemText primary="Dept Requests" />
+                </ListItemButton>
                 
                 <ListItemButton onClick={handle_Click} component={Link} to="/supply-chain">
                   <ListItemIcon><InboxIcon /></ListItemIcon>
@@ -339,6 +347,7 @@ export default function MiniDrawer ({children}){
         {children}
       </Box>
     </Box>
+    <ToastContainer />
     </ThemeProvider>
   );
 }

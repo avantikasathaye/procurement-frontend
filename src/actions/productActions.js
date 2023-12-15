@@ -2,6 +2,7 @@ import axios from "axios"
 import { BASE_URL } from "../constants/commonConstants"
 import { ADD_NEW_PRODUCT_FAILURE, ADD_NEW_PRODUCT_REQUEST, ADD_NEW_PRODUCT_SUCCESS, PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from "../constants/productConstants"
 import {removeLocalStorageItems} from './commonActions'
+import { ShowToasts } from "../components/statelessViews"
 
 
 export const listProducts = () => async (dispatch) => {
@@ -47,6 +48,8 @@ export const addNewProduct = (productData) => async(dispatch) => {
             type: ADD_NEW_PRODUCT_SUCCESS,
             payload: data
         })
+        
+        ShowToasts("Product Added Successfully!")
 
         removeLocalStorageItems(productData)
     }catch(error){
