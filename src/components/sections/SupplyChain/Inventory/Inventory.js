@@ -69,9 +69,6 @@ const Inventory = () => {
                 <Typography variant="h4">
                   Inventory
                 </Typography>
-
-                {/* TO DO : Alignment needs to be fixed after adding the Search Bar */}
-                {/*  <CustomersSearch /> */}
                 
                 <Stack
                   alignItems="center"
@@ -135,8 +132,6 @@ const Inventory = () => {
               </div>
               </div>
             </Stack>
-            
-            {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
 
             {showAddProductsForm ? 
                 <AddInventory products={products} onAdd={handleSaveInventory}/> 

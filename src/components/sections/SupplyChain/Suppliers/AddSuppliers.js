@@ -63,8 +63,6 @@ export const AddSuppliers = (props) => {
   const [productType, setProductType] = useState("")
 
   const handleStateChanges = (brname) => {
-    debugger;
-    //setBrandName(brname)
     localStorage.setItem('brandName', brname)
   }
 

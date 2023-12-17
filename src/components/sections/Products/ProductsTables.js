@@ -83,12 +83,6 @@ export const ProductsTable = (props) => {
                 <TableCell>
                   Total Rate (Inc. GST)
                 </TableCell>
-               {/*  <TableCell>
-                Unit Rate (Inc. GST)
-                </TableCell>
-                <TableCell>
-                Unit Rate (Exc. GST)
-                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -153,12 +147,6 @@ export const ProductsTable = (props) => {
                     <TableCell>
                       {customer.totalRate}
                     </TableCell>
-                   {/*  <TableCell>
-                      {customer.unitRateExcGST}
-                    </TableCell>
-                    <TableCell>
-                      {customer.unitRateIncGST}
-                    </TableCell> */}
                   </TableRow>
                 );
               })}

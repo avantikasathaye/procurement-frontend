@@ -71,10 +71,6 @@ const Suppliers = () => {
                 <Typography variant="h4">
                   Suppliers
                 </Typography>
-
-                {/* TO DO : Alignment needs to be fixed after adding the Search Bar */}
-               {/*  <CustomersSearch /> */}
-                
                 <Stack
                   alignItems="center"
                   direction="row"
@@ -127,9 +123,6 @@ const Suppliers = () => {
                 </Button>}
               </div>
             </Stack>
-            
-            {/* {showAddProductDialog && <AddProductDialogBox open={showAddProductDialog} close={() => setShowAddProductDialog(false)}/>} */}
-
             {showAddProductsForm ? 
                 <AddSuppliers products={allSuppliers} onAdd={handleSaveSupplier} supplierTypes={allSupplierTypes}/> 
                 : 

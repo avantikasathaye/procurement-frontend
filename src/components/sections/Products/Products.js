@@ -68,10 +68,6 @@ const Products = () => {
                 <Typography variant="h4">
                   Products
                 </Typography>
-
-                {/* TO DO : Alignment needs to be fixed after adding the Search Bar */}
-               {/*  <CustomersSearch /> */}
-                
                 <Stack
                   alignItems="center"
                   direction="row"
