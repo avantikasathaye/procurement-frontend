@@ -30,7 +30,7 @@ import People from '@mui/icons-material/People';
 import PermMedia from '@mui/icons-material/PermMedia';
 import Dns from '@mui/icons-material/Dns';
 import Public from '@mui/icons-material/Public';
-import { brandNames, categoryNames, productTypes } from '../constants/commonConstants';
+import { brandNames, categoryNames, fulfillmentStatusTypes, productTypes } from '../constants/commonConstants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -472,7 +472,6 @@ export const Inventory_AddInventory = (props) => {
                           ))}
                       </TextField>
                     </Grid>
-
                     <Grid item>
                         <>
                           <Typography variant='subtitle2'>Batch Number</Typography>
@@ -484,12 +483,6 @@ export const Inventory_AddInventory = (props) => {
                           /> 
                         </>
                      </Grid>
-
-                   {/*  <Grid item>
-                        <TypoTextGridItem title="Product Name" defaultValue={localStorage.getItem("productName")} 
-                              onChange={(e) => props.tempSaveName(e.target.value)}/>
-                     </Grid> */}
-
                 </Grid>    
                 <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                     spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -828,5 +821,125 @@ export const SupplyChain_Dashboard_Chip = () => {
         <StyledChip label="Non-Critical" variant="outlined" />
     </Stack>
     </Box>
+  )
+}
+
+export const DeptRequests_AddRecord = (props) => {
+
+  const [qty, setQty] = useState("0")
+
+  const handleProductNameChange = (productName) => {
+    const selectedProduct = props.props.inventory.find(product => product.name === productName);
+    setQty(selectedProduct.totalAvailableQuantity)
+    localStorage.setItem("requestedProductQuantity", selectedProduct.totalAvailableQuantity)
+  }
+
+  return(
+      <>
+            <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 1, width: '25ch' },
+                  minWidth: 800
+                }}
+                noValidate
+                autoComplete="off"
+              >
+              <div style={{marginTop: "20px"}}>
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item>
+                      <Typography variant='subtitle2'>Requested Product Name</Typography>
+                      <TextField
+                        id="outlined-select-brand"
+                        select
+                        value={props.brandName}
+                        defaultValue={localStorage.getItem("requestedProductName")}
+                        onChange={(e) => {
+                          props.tempSaveRequestedProductName(e.target.value)
+                          handleProductNameChange(e.target.value)
+                        }}
+                      >
+                        {props.props.inventory.map((item) => (
+                            <MenuItem value={item.name} key={item.name}>{item.name}</MenuItem>
+                          ))}
+                      </TextField>
+                    </Grid>
+
+                    <Grid item>
+                        <Typography variant='subtitle2'>Requested Product Quantity</Typography>
+                        <TextField
+                          id="outlined-select-quantity"
+                          select
+                          value={props.requestedProductQuantity}
+                          defaultValue={localStorage.getItem("requestedProductQuantity")}
+                          onChange={(e) => props.tempSaveRequestedProductQuantity(e.target.value)}
+                        >
+                         {
+                            
+                            [...Array(qty).keys()].map(x => (
+                              <MenuItem key={x+1} value={x+1}>{x+1}</MenuItem>
+                            ))}
+                          
+                        </TextField>
+                    </Grid>
+
+                    <Grid item>
+                        <TypoTextGridItemInput title="Batch Number" defaultValue={localStorage.getItem("batchNumber")} 
+                                            onChange={(e) => props.tempSaveBatchNumber(e.target.value)}/>
+                     </Grid>
+
+                </Grid>    
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                    spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                     <Grid item>
+                        <TypoTextGridItemInput title="Requesting Department" defaultValue={localStorage.getItem("requestingDepartmentName")} 
+                                            onChange={(e) => props.tempSaveRequestingDepartmentName(e.target.value)}/>
+                     </Grid>
+
+                     <Grid item>
+                      <TypoTextGridItemInput title="Date Requested" defaultValue={localStorage.getItem("dateRequested")}
+                                          onChange={(e) => props.tempSaveDateRequested(e.target.value)}/>
+                     </Grid>
+
+                     <Grid item>
+                      <TypoTextGridItemInput title="Date Fulfilled" defaultValue={localStorage.getItem("dateFulfilled")}
+                                          onChange={(e) => props.tempSaveDateFulfilled(e.target.value)}/>
+                     </Grid>
+                  </Grid>
+
+                  <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                      <Grid item>
+                        <Typography variant='subtitle2'>Fulfillment Status</Typography>
+                        <TextField
+                          id="outlined-select-fulfillemtStatus"
+                          select
+                          value={props.fulfillmentStatus}
+                          defaultValue={localStorage.getItem("fulfillmentStatus")}
+                          onChange={(e) => {
+                            props.tempSaveFulfillmentStatus(e.target.value)
+                            props.updateInventoryCount(e.target.value, qty)
+                          }}
+                        >
+                          {fulfillmentStatusTypes.map((item) => (
+                              <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
+                            ))}
+                        </TextField>
+                      </Grid>
+
+                     {/*  <Grid item>
+                        <TypoTextGridItemInput title="Unit Rate" defaultValue={localStorage.getItem("unitRate")} 
+                                                onChange={(e) => props.tempSaveUnitRate(e.target.value)}/>
+                      </Grid>
+
+                     <Grid item>
+                        <TypoTextGridItemInput title="GST Percentage" defaultValue={localStorage.getItem("gst")}
+                        onChange={(e) => props.tempSaveGstPercentage(e.target.value)}/>
+                      </Grid> */}
+                </Grid>
+              </div>
+          </Box>
+    </>
   )
 }

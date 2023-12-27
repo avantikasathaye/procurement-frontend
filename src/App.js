@@ -10,6 +10,7 @@ import Login from './screens/Login';
 import AuthLayout from './screens/AuthLayout';
 import Inventory from './components/sections/SupplyChain/Inventory/Inventory';
 import Suppliers from './components/sections/SupplyChain/Suppliers/Suppliers';
+import DepartmentRequests from './components/sections/DepartmentRequests/DepartmentRequests';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/supply-chain" element={<MiniDrawer><SupplyChain /></MiniDrawer>}/>
           <Route path="/inventory" element={<MiniDrawer><Inventory /></MiniDrawer>}/>
           <Route path="/suppliers" element={<MiniDrawer><Suppliers /></MiniDrawer>}/>
+          <Route path="/department-requests" element={<MiniDrawer><DepartmentRequests /></MiniDrawer>}/>
       </Routes>
    {/*  </MiniDrawer> */}
   </BrowserRouter>

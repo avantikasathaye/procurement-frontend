@@ -5,14 +5,16 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer } from "./reducers/productReducers"
 import { allSupplierTypesReducer, allSuppliersListReducer, inventoryListReducer } from "./reducers/supplyChainReducers"
 import { loginReducer } from "./reducers/userReducers"
+import { departmentRequestListReducer, departmentRequestReducer } from "./reducers/departmentRequestReducers"
 
 const reducer = combineReducers({
     login: loginReducer,
     productList: productListReducer,
     inventoryList: inventoryListReducer,
     allSuppliersList: allSuppliersListReducer,
-    allSupplierTypes: allSupplierTypesReducer
-    
+    allSupplierTypes: allSupplierTypesReducer,
+    departmentRequest: departmentRequestReducer,
+    departmentRequestList: departmentRequestListReducer
 })
 
 const initialState = {}
