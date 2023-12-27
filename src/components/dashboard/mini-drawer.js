@@ -258,10 +258,10 @@ export default function MiniDrawer ({children}){
                 component="nav"
                 aria-labelledby="nested-list-subheader"
               >
-                {/* <ListItemButton>
+                <ListItemButton component={Link} to="/supply-chain">
                   <ListItemIcon><SendIcon /></ListItemIcon>
                   <ListItemText primary="Overview" />
-                </ListItemButton> */}
+                </ListItemButton>
                 
                 <ListItemButton component={Link} to="/products">
                     <ListItemIcon><DraftsIcon /></ListItemIcon>
@@ -273,7 +273,7 @@ export default function MiniDrawer ({children}){
                     <ListItemText primary="Dept Requests" />
                 </ListItemButton>
                 
-                <ListItemButton onClick={handle_Click} component={Link} to="/supply-chain">
+                <ListItemButton onClick={handle_Click} component={Link} to="/inventory">
                   <ListItemIcon><InboxIcon /></ListItemIcon>
                   <ListItemText primary="Supply Chain" />
                   {menuOpen ? <ExpandLess /> : <ExpandMore />}

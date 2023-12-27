@@ -31,7 +31,9 @@ const Inventory = () => {
       "batchNumber": localStorage.getItem("batchNumber"),
       "oem": localStorage.getItem("oem"),
       "hsnCode": localStorage.getItem("hsnCode"),
-      "totalQuantity": localStorage.getItem("totalQuantity")
+      "equipmentType": localStorage.getItem("equipmentType"),
+      "totalQuantity": localStorage.getItem("totalQuantity"),
+      "totalConsumedQuantity": 0
     }
 
     dispatch(addNewInventory(newInventoryData));

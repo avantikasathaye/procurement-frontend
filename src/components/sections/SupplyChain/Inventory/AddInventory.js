@@ -49,21 +49,9 @@ export const AddInventory = (props) => {
   const [batchNumber, setBatchNumber] = useState("")
   const [oem, setOem] = useState("")
   const [hsnCode, setHsnCode] = useState("")
-  const [salesRate, setSalesRate] = useState("")
-  const [gst, setGst] = useState("")
-  const [size, setSize] = useState("")
-  const [skuCode, setSkuCode] = useState("")
-  const [unitType, setUnitType] = useState("")
-  const [warranty, setWarranty] = useState("")
-  const [tags, setTags] = useState("")
-  const [specification, setSpecification] = useState("")
-  const [unitRateIncGst, setUnitRateIncGst] = useState("")
-  const [unitRateExcGst, setUnitRateExcGst] = useState("")
-  const [discountStartDate, setDiscountStartDate] = useState("")
-  const [discountEndDate, setDiscountEndDate] = useState("")
-  const [discountType, setDiscountType] = useState("")
-  const [discountValue, setDiscountValue] = useState("")
-  const [discountStatus, setDiscountStatus] = useState("")
+  const [equipmentType, setEquipmentType] = useState("")
+  const [totalConsumedQuantity, setTotalConsumedQuantity] = useState("")
+  const [totalQuantity, setTotalQuantity] = useState("")
 
   const handleStateChanges = (brname) => {
     debugger;
@@ -99,39 +87,19 @@ export const AddInventory = (props) => {
     localStorage.setItem("hsnCode", hsnCode)
   }
 
-  const tempSaveSkuCode = (skuCode) => {
-    setSkuCode(skuCode);
-    localStorage.setItem("skuCode", skuCode)
-  }
-
-  const tempSaveUnitType = (unitType) => {
-    setUnitType(unitType);
-    localStorage.setItem("unitType", unitType)
-  }
-
-  const tempSaveSize = (size) => {
-    setSize(size);
-    localStorage.setItem("size", size)
-  }
-
-  const tempSaveWarranty = (warranty) => {
-    setWarranty(warranty);
-    localStorage.setItem("warranty", warranty)
-  }
-
-  const tempSaveTags = (tags) => {
-    setTags(tags)
-    localStorage.setItem("tags", tags)
-  }
-
-  const tempSaveSpecification = (specification) => {
-    setSpecification(specification)
-    localStorage.setItem("specification", specification)
+  const tempSaveTotalConsumedQuantity = (totalConsumedQuantity) => {
+    setTotalConsumedQuantity(totalConsumedQuantity)
+    localStorage.setItem("totalConsumedQuantity", totalConsumedQuantity)
   }
 
   const tempSaveTotalQuantity = (totalQuantity) => {
-    setSpecification(totalQuantity)
+    setTotalQuantity(totalQuantity)
     localStorage.setItem("totalQuantity", totalQuantity)
+  }
+
+  const tempSaveEquipmentType = (equipmentType) => {
+    setEquipmentType(equipmentType)
+    localStorage.setItem(equipmentType)
   }
 
   return (
@@ -141,9 +109,9 @@ export const AddInventory = (props) => {
           <Box>
             <Inventory_AddInventory props={props} products={props.products} handleStateChanges={handleStateChanges} tempSaveCategory={tempSaveCategory}
                       tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
-                      tempSaveBatchNumber={tempSaveBatchNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
-                      tempSaveUnitType={tempSaveUnitType} tempSaveTags={tempSaveTags} tempSaveWarranty={tempSaveWarranty}
-                      tempSaveSpecification={tempSaveSpecification} tempSaveTotalQuantity={tempSaveTotalQuantity} 
+                      tempSaveBatchNumber={tempSaveBatchNumber} tempSaveTotalQuantity={tempSaveTotalQuantity}
+                      tempSaveTotalConsumedQuantity={tempSaveTotalConsumedQuantity} 
+                      tempSaveEquipmentType={tempSaveEquipmentType}
                       onClickAdd={props.onAdd}/>
           </Box>
         </Scrollbar>

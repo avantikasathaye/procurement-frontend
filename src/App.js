@@ -18,6 +18,7 @@ function App() {
     
       <Routes>
           <Route path="/login" element={<AuthLayout><Login /></AuthLayout>}/>
+          <Route path="/overview" element={<MiniDrawer><SupplyChain /></MiniDrawer>}/>
           <Route path="/products" element={<MiniDrawer><Products /></MiniDrawer>} />
           <Route path="/supply-chain" element={<MiniDrawer><SupplyChain /></MiniDrawer>}/>
           <Route path="/inventory" element={<MiniDrawer><Inventory /></MiniDrawer>}/>

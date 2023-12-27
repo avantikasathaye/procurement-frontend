@@ -15,6 +15,21 @@ export const fulfillmentStatusTypes = [
   }
 ]
 
+export const allEquipmentTypes = [
+  {
+    value: 'Emergency',
+    label: 'Emergency',
+  },
+  {
+    value: 'Critical',
+    label: 'Critical',
+  },
+  {
+    value: 'Non-Critical',
+    label: 'Non-Critical',
+  },
+]
+
 export const productTypes = [
     {
       value: 'Instruments',

@@ -63,7 +63,7 @@ export const InventoryTable = (props) => {
                   OEM
                 </TableCell>
                 <TableCell>
-                  Specification
+                  Equipment Type
                 </TableCell>
                 <TableCell>
                   Total Quantity
@@ -109,7 +109,7 @@ export const InventoryTable = (props) => {
                       {item.oem}
                     </TableCell>
                     <TableCell>
-                      {item.specification}
+                      {item.equipmentType}
                     </TableCell>
                     <TableCell>
                       {item.totalQuantity}

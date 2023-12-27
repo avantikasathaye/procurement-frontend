@@ -72,6 +72,9 @@ export const ProductsTable = (props) => {
                   OEM
                 </TableCell>
                 <TableCell>
+                  Equipment Type
+                </TableCell>
+                <TableCell>
                   HSN Code
                 </TableCell>
                 <TableCell>
@@ -80,9 +83,9 @@ export const ProductsTable = (props) => {
                 <TableCell>
                   GST (%)
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   Total Rate (Inc. GST)
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -124,7 +127,7 @@ export const ProductsTable = (props) => {
                       {customer.category}
                     </TableCell>
                     <TableCell>
-                      {customer.batchNumber}
+                      {customer.modelNumber}
                     </TableCell>
                     <TableCell>
                       {customer.productName}
@@ -136,17 +139,20 @@ export const ProductsTable = (props) => {
                       {customer.oem}
                     </TableCell>
                     <TableCell>
+                      {customer.equipmentType}
+                    </TableCell>
+                    <TableCell>
                       {customer.hsnCode}
                     </TableCell>
                     <TableCell>
-                      {customer.salesRate}
+                      {customer.unitRate}
                     </TableCell>
                     <TableCell>
                       {customer.gst}
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       {customer.totalRate}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}

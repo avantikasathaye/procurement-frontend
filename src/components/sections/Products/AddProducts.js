@@ -52,7 +52,7 @@ export const AddProducts = (props) => {
   const [brandName, setBrandName] = useState("")
   const [category, setCategory] = useState("")
   const [productName, setProductName] = useState("")
-  const [batchNumber, setBatchNumber] = useState("")
+  const [modelNumber, setModelNumber] = useState("")
   const [oem, setOem] = useState("")
   const [hsnCode, setHsnCode] = useState("")
   const [unitRate, setUnitRate] = useState("")
@@ -80,11 +80,10 @@ export const AddProducts = (props) => {
   const [dealerDiscountRate, setDealerDiscountRate] = useState("")
   const [dealerDiscount, setDealerDiscount] = useState("")
   const [profitMarginType, setProfitMarginType] = useState("")
-
+  const [equipmentType, setEquipmentType] = useState("Non-Critical")
 
 
   const tempSaveBrand = (brname) => {
-    debugger;
     setBrandName(brname)
     localStorage.setItem('brandName', brname)
   }
@@ -94,7 +93,7 @@ export const AddProducts = (props) => {
     localStorage.setItem("category", category)
   }
 
-  const tempSaveName = (productName) => {
+  const tempSaveProductName = (productName) => {
     setCategory(productName);
     localStorage.setItem("productName", productName)
   }
@@ -104,9 +103,9 @@ export const AddProducts = (props) => {
     localStorage.setItem("oem", oem)
   }
 
-  const tempSaveBatchNumber = (batchNumber) => {
-    setBatchNumber(batchNumber);
-    localStorage.setItem("batchNumber", batchNumber)
+  const tempSaveBatchNumber = (modelNumber) => {
+    setModelNumber(modelNumber);
+    localStorage.setItem("modelNumber", modelNumber)
   }
 
   const tempSaveHsnCode = (hsnCode) => {
@@ -154,6 +153,11 @@ export const AddProducts = (props) => {
     localStorage.setItem("gst", gst)
   }
 
+  const tempSaveEquipmentType = (equipmentType) => {
+    setEquipmentType(equipmentType)
+    localStorage.setItem("equipmentType", equipmentType)
+  }
+
   const handleSaveProduct = () => {
     const newProductData = {
       "brand": localStorage.getItem("brandName"),
@@ -164,7 +168,8 @@ export const AddProducts = (props) => {
       "oem": localStorage.getItem("oem"),
       "hsnCode": localStorage.getItem("hsnCode"),
       "unitRate": localStorage.getItem("unitRate"),
-      "gst": localStorage.getItem("gst")
+      "gst": localStorage.getItem("gst"),
+      "equipmentType": localStorage.getItem("equipmentType")
     }
 
     dispatch(addNewProduct(newProductData));
@@ -180,11 +185,12 @@ export const AddProducts = (props) => {
       <Scrollbar>
         <Box >
         <Products_ProductDetails props={props} tempSaveBrand={tempSaveBrand} tempSaveCategory={tempSaveCategory}
-                    tempSaveName={tempSaveName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
+                    tempSaveProductName={tempSaveProductName} tempSaveOem={tempSaveOem} tempSaveHsnCode={tempSaveHsnCode} 
                     tempSaveBatchNumber={tempSaveBatchNumber} tempSaveSize={tempSaveSize} tempSaveSkuCode={tempSaveSkuCode}
                     tempSaveManufacturer={tempSaveManufacturer} tempSaveWarranty={tempSaveWarranty}
                     tempSaveSpecification={tempSaveSpecification} tempSaveUnitRate={tempSaveUnitRate} 
-                    tempSaveGstPercentage={tempSaveGstPercentage} onClickAdd={props.onAdd}/>
+                    tempSaveGstPercentage={tempSaveGstPercentage} tempSaveEquipmentType={tempSaveEquipmentType}
+                    onClickAdd={props.onAdd}/>
         </Box>
       </Scrollbar>
     </Card>

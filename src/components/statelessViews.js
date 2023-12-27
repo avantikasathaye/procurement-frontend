@@ -30,7 +30,7 @@ import People from '@mui/icons-material/People';
 import PermMedia from '@mui/icons-material/PermMedia';
 import Dns from '@mui/icons-material/Dns';
 import Public from '@mui/icons-material/Public';
-import { brandNames, categoryNames, fulfillmentStatusTypes, productTypes } from '../constants/commonConstants';
+import { allEquipmentTypes, brandNames, categoryNames, fulfillmentStatusTypes, productTypes } from '../constants/commonConstants';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -343,7 +343,7 @@ export const Products_ProductDetails = (props) => {
                                     id="outlined-productName-input"
                                     type="name"
                                     defaultValue={localStorage.getItem("productName") || " "}
-                                    onChange={(e) => props.tempSaveName(e.target.value)}
+                                    onChange={(e) => props.tempSaveProductName(e.target.value)}
                                 /> 
                               </>
                      </Grid>
@@ -384,6 +384,24 @@ export const Products_ProductDetails = (props) => {
                         onChange={(e) => props.tempSaveGstPercentage(e.target.value)}/>
                       </Grid>
                 </Grid>
+
+                <Grid container wrap='no-wrap' justifyContent={'space-around'} 
+                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item>
+                      <Typography variant='subtitle2'>Equipment Type</Typography>
+                      <TextField
+                        id="outlined-select-brand"
+                        select
+                        value={props.brandName}
+                        defaultValue={localStorage.getItem("equipmentType")}
+                        onChange={(e) => props.tempSaveEquipmentType(e.target.value)}
+                      >
+                        {allEquipmentTypes.map((item) => (
+                            <MenuItem value={item.value} key={item.value}>{item.label}</MenuItem>
+                          ))}
+                      </TextField>
+                    </Grid>
+                </Grid> 
               </div>
           </Box>
     </>
@@ -396,19 +414,23 @@ export const Inventory_AddInventory = (props) => {
   const [oem, setOem] = useState("")
   const [hsnCode, setHsnCode] = useState("")
   const [totalQuantity, setTotalQuantity] = useState("")
+  const [equipmentType, setEquipmentType] = useState("")
 
   const handleProductNameChange = (productName) => {
     debugger;
     const selectedProduct = props.products.find(product => product.productName === productName);
     
-    setBatchNumber(selectedProduct.batchNumber)
-    localStorage.setItem("batchNumber", selectedProduct.batchNumber)
+    setBatchNumber(selectedProduct.modelNumber)
+    localStorage.setItem("batchNumber", selectedProduct.modelNumber)
     
     setOem(selectedProduct.oem)
     localStorage.setItem("oem", selectedProduct.oem)
 
     setHsnCode(selectedProduct.hsnCode)
     localStorage.setItem("hsnCode", selectedProduct.hsnCode)
+
+    setEquipmentType(selectedProduct.equipmentType)
+    localStorage.setItem("equipmentType", selectedProduct.equipmentType)
   }
 
   return(
@@ -425,36 +447,6 @@ export const Inventory_AddInventory = (props) => {
               <div style={{marginTop: "20px"}}>
                 <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                       spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    {/* <Grid item>
-                      <Typography variant='subtitle2'>Brand</Typography>
-                      <TextField
-                        id="outlined-select-brand"
-                        select
-                        value={props.brandName}
-                        defaultValue={localStorage.getItem("brandName")}
-                        onChange={(e) => props.tempSaveBrand(e.target.value)}
-                      >
-                        {brandNames.map((item) => (
-                            <MenuItem value={item.value} key={item.value}>{item.value}</MenuItem>
-                          ))}
-                      </TextField>
-                    </Grid>
-
-                    <Grid item>
-                        <Typography variant='subtitle2'>Category</Typography>
-                        <TextField
-                          id="outlined-select-category"
-                          select
-                          value={props.brandName}
-                          defaultValue={localStorage.getItem("category")}
-                          onChange={(e) => props.tempSaveCategory(e.target.value)}
-                        >
-                          {categoryNames.map((item) => (
-                                          <MenuItem value={item.value} key={item.value}>{item.value}</MenuItem>
-                                        ))}
-                        </TextField>
-                    </Grid> */}
-
                     <Grid item>
                       <Typography variant='subtitle2'>Products</Typography>
                       <TextField
@@ -473,16 +465,9 @@ export const Inventory_AddInventory = (props) => {
                       </TextField>
                     </Grid>
                     <Grid item>
-                        <>
-                          <Typography variant='subtitle2'>Batch Number</Typography>
-                          <TextField
-                              id="outlined-batchNumber-input"
-                              type="name"
-                              defaultValue=" " value={batchNumber || " "}
-                              onChange={() => props.tempSaveModelNumber(batchNumber)}
-                          /> 
-                        </>
-                     </Grid>
+                      <TypoTextGridItem title="Model Number" defaultValue={localStorage.getItem("batchNumber")} value={batchNumber || " "}
+                                          onChange={() => props.tempSaveBatchNumber(batchNumber)}/>
+                    </Grid>
                 </Grid>    
                 <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                     spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -498,30 +483,10 @@ export const Inventory_AddInventory = (props) => {
 
                   <Grid container wrap='no-wrap' justifyContent={'space-around'} 
                       spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-
-                    {/* <Grid item>
-                      <Typography variant='subtitle2'>Unit-Type</Typography>
-                      <TextField
-                        id="outlined-select-unitType"
-                        select
-                        defaultValue={localStorage.getItem("unitType")}
-                      >
-                            {dummyData.map((option) => (
-                              <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                              </MenuItem>
-                            ))}
-                          </TextField>
-                      </Grid>
                     <Grid item>
-                            <TypoTextGridItem title="Warranty In Months" defaultValue={localStorage.getItem("warranty")}
-                                                onChange={(e) => props.tempSaveWarranty(e.target.value)}/>
-                    </Grid> */}
-
-                   {/*  <Grid item>
-                     <TypoTextGridItem title="Total Quantity" defaultValue={localStorage.getItem("totalQuantity")} 
-                                            onChange={(e) => props.tempSaveTags(e.target.value)}/>
-                     </Grid> */}
+                      <TypoTextGridItem title="EquipmentType" defaultValue={localStorage.getItem("equipmentType")}
+                                  value={equipmentType || " "} onChange={(e) => props.tempSaveEquipmentType(e.target.value)}/>
+                    </Grid>
 
                      <Grid item>
                      <>
@@ -529,37 +494,13 @@ export const Inventory_AddInventory = (props) => {
                         <TextField
                             id="outlined-totalQuantity-input"
                             type="name"
-                            defaultValue={localStorage.getItem("totalQuantity")}
+                            defaultValue=" "
                             onChange={(e) => props.tempSaveTotalQuantity(e.target.value)}
                             //value={value || " "}
                         /> 
                       </>
                      </Grid>
                 </Grid>
-
-                
-
-
-                {/* <Grid container wrap='no-wrap' justifyContent={'space-around'} 
-                      spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-
-                     <Grid item>
-                      <TypoTextGridItem title="Specification" defaultValue={localStorage.getItem("specification")}
-                                          onChange={(e) => props.tempSaveSpecification(e.target.value)}/>
-                    </Grid>
-
-                    <Grid item>
-                        <TypoTextGridItem title="Unit Rate" defaultValue={localStorage.getItem("unitRate")}
-                                            onChange={(e) => props.tempSaveUnitRate(e.target.value)}/>
-
-                    </Grid>
-                      <Grid item>
-                        <TypoTextGridItem title="GST Percentage" defaultValue={localStorage.getItem("gst")}
-                            onChange={(e) => props.tempSaveGstPercentage(e.target.value)}/>
-                      </Grid>
-
-                    
-                  </Grid>  */}
               </div>
           </Box>
     </>

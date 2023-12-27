@@ -29,13 +29,13 @@ const Products = () => {
       "brand": localStorage.getItem("brandName"),
       "productName": localStorage.getItem("productName"),
       "category" : localStorage.getItem("category"),
-      "name": localStorage.getItem("name"),
-      "batchNumber": localStorage.getItem("batchNumber"),
+      "modelNumber": localStorage.getItem("modelNumber"),
       "manufacturer": localStorage.getItem("manufacturer"),
       "oem": localStorage.getItem("oem"),
       "hsnCode": localStorage.getItem("hsnCode"),
       "unitRate": localStorage.getItem("unitRate"),
-      "gst": localStorage.getItem("gst")
+      "gst": localStorage.getItem("gst"),
+      "equipmentType": localStorage.getItem("equipmentType")
     }
 
     dispatch(addNewProduct(newProductData));
