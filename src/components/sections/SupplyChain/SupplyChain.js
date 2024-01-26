@@ -2,9 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container } from '@mui/material';
-import { SupplyChain_Dashboard_Chip, SupplyChain_Dashboard_UpdatesCard } from '../../statelessViews';
+import { SupplyChain_Dashboard_Chip, SupplyChain_Dashboard_UpdatesCard, 
+          SupplyChain_SuperAdmin_Dashboard_UpdatesCard } from '../../statelessViews';
 import { listProducts } from '../../../actions/productActions';
 import { SupplyChain_Dashboard } from '../../statelessViews';
+import { getInventory } from '../../../actions/supplyChainActions';
 
 const SupplyChain = () => {
     const dispatch = useDispatch();
@@ -27,8 +29,17 @@ const SupplyChain = () => {
   const productList = useSelector(state => state.productList)
   const { products } = productList
 
+  const inventoryList = useSelector(state => state.inventoryList)
+  const {inventory} = inventoryList
+
+  const login = useSelector(state => state.login)
+  const { userInfo } = login
+
+  debugger;
+
   useEffect(() => {
     dispatch(listProducts())
+    dispatch(getInventory())
   },[dispatch])
 
 
@@ -41,15 +52,35 @@ const SupplyChain = () => {
     }}>
         <Container maxWidth="lg">
             <>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                        <SupplyChain_Dashboard title="Supplies Approved"/>
-                        <SupplyChain_Dashboard title="Pending"/>
-                        <SupplyChain_Dashboard title="Rejected"/>
-                    </div>
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
-                        <SupplyChain_Dashboard_UpdatesCard totalProducts={products.length}/>
+              <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                  <SupplyChain_Dashboard title="Inventory" totalInventory={inventory?.length}/>
+                  <SupplyChain_Dashboard title="Pending Purchase Orders"/>
+                  <SupplyChain_Dashboard title="Pending Department Requests"/>
+                  <SupplyChain_Dashboard title="Expected Delivery Products"/>
+              </div>
+              {/* <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
+                  <SupplyChain_Dashboard_UpdatesCard totalProducts={products.length} totalInventory={inventory?.length}/>
+                  <SupplyChain_Dashboard_Chip />
+              </div> */}
+
+              <div style={{display: "flex", flexDirection: "row", justifyContent: "flex-start"}}>
+                  {userInfo.isSuperAdmin ? 
+                    (
+                      <>
+                        <SupplyChain_SuperAdmin_Dashboard_UpdatesCard totalProducts={products.length} totalInventory={inventory?.length}/>
                         <SupplyChain_Dashboard_Chip />
-                    </div>
+                      </>
+                    ) : (
+                      <>
+                        <SupplyChain_Dashboard_UpdatesCard totalProducts={products.length} totalInventory={inventory?.length}/>
+                        <SupplyChain_Dashboard_Chip />
+                      </>
+                    )
+                  }
+                  
+              </div>
+
+             
             </>
     </Container>
     </Box>

@@ -129,7 +129,7 @@ const Inventory = () => {
                     variant="contained"
                     onClick={handleSaveInventory}
                   >
-                    Save Inventory
+                    Add Inventory
                   </Button>}
               </div>
               </div>

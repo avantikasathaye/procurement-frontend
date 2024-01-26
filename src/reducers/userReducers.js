@@ -1,6 +1,6 @@
 import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS } from "../constants/userConstants"
 
-export const loginReducer = (state = {}, action) => {
+export const loginReducer = (state = {userInfo: []}, action) => {
     switch(action.type){
         case USER_LOGIN_REQUEST:
             return { 

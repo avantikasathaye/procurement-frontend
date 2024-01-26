@@ -616,7 +616,7 @@ export const SupplyChain_Dashboard = (props) => {
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 1 auto' }}>
               <Typography component="div" variant="h5">
-                0
+                {props.totalInventory}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div">
                 {props.title}
@@ -632,10 +632,14 @@ export const SupplyChain_Dashboard = (props) => {
 export const SupplyChain_Dashboard_UpdatesCard = (props) => {
 
   const data = [
-    { icon: <People />, label: 'Supplies', count: "0" },
-    { icon: <Dns />, label: 'Raw materials', count: "0" },
-    { icon: <PermMedia />, label: 'Product', count: props.totalProducts },
-    { icon: <Public />, label: 'Open Order', count: "0" },
+    { icon: <People />, label: 'Master Products', count: props.totalProducts },
+    { icon: <Dns />, label: 'Inventory', count: props.totalInventory },
+    { icon: <PermMedia />, label: 'Expiring Products', count: "0" },
+    { icon: <Public />, label: 'Total Stock Outs', count: "0" },
+    { icon: <Public />, label: 'Billing', count: "0" },
+    { icon: <Public />, label: 'Delivery', count: "0" },
+    { icon: <Public />, label: 'Open Orders', count: "0" },
+    { icon: <Public />, label: 'Fulfilled Orders', count: "0" },
   ];
 
   const UpdatesNav = styled(List)({
@@ -689,6 +693,128 @@ export const SupplyChain_Dashboard_UpdatesCard = (props) => {
                 <ListItemText
                   sx={{ my: 0 , color: "black"}}
                   primary="Updates"
+                  primaryTypographyProps={{fontSize: 20, fontWeight: 'medium', letterSpacing: 0}}
+                />
+              </ListItemButton>
+
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label" style={{color: "black"}}>Months</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Months"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={1}>Last Month</MenuItem>
+                    <MenuItem value={2}>Last 2</MenuItem>
+                    <MenuItem value={6}>Last 6</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </div>
+            <Divider />
+            <Box
+              sx={{
+                bgcolor: open ? 'rgba(71, 98, 130, 0.2)' : null,
+                pb: open ? 2 : 0,
+              }}
+            >
+              
+              {open &&
+                data.map((item) => (
+                  <ListItemButton
+                    key={item.label}
+                    sx={{ py: 0, minHeight: 50, color: 'black' }}
+                  >
+                    <ListItemIcon sx={{ color: 'inherit' }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.label}
+                      primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium' }}
+                    />
+                    <ListItemText
+                      primary={item.count}
+                      primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium' }}
+                    />
+                  </ListItemButton>
+                ))}
+            </Box>
+          </UpdatesNav>
+        </Paper>
+      </ThemeProvider>
+    </Box>
+</>
+  )
+}
+
+export const SupplyChain_SuperAdmin_Dashboard_UpdatesCard = (props) => {
+
+  const data = [
+    { icon: <People />, label: 'Master Products', count: props.totalProducts },
+    { icon: <Dns />, label: 'Inventory', count: props.totalInventory },
+    { icon: <PermMedia />, label: 'Expiring Products', count: "0" },
+    { icon: <Public />, label: 'Total Stock Outs', count: "0" },
+    { icon: <Public />, label: 'Billing', count: "0" },
+    { icon: <Public />, label: 'Delivery', count: "0" },
+    { icon: <Public />, label: 'Open Orders', count: "0" },
+    { icon: <Public />, label: 'Fulfilled Orders', count: "0" },
+    { icon: <Public />, label: 'Hospital Status', count: "0" },
+  ];
+
+  const UpdatesNav = styled(List)({
+    '& .MuiListItemButton-root': {
+      paddingLeft: 24,
+      paddingRight: 24,
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 0,
+      marginRight: 16,
+    },
+    '& .MuiSvgIcon-root': {
+      fontSize: 20,
+    },
+    backgroundColor: "#C7F1DD",
+    borderRadius: "4px"
+  });
+
+  const [open, setOpen] = React.useState(true);
+
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+
+  return(
+    <>
+    <Box sx={{ display: 'flex', marginTop: "20px" , marginRight: "15px"}}>
+      <ThemeProvider
+        theme={createTheme({
+          components: {
+            MuiListItemButton: {
+              defaultProps: {
+                disableTouchRipple: true,
+              },
+            },
+          },
+          palette: {
+            mode: 'dark',
+            primary: { main: 'rgb(102, 157, 246)' },
+            background: { paper: 'rgb(5, 30, 52)' },
+          },
+        })}
+      >
+        <Paper elevation={0} sx={{ maxWidth: 256 }}>
+          <UpdatesNav component="nav" disablePadding>
+            <div style={{display: "flex", flexDirection: "row"}}>
+              <ListItemButton component="a" href="#customized-list">
+                <ListItemText
+                  sx={{ my: 0 , color: "black"}}
+                  primary="Admin Updates"
                   primaryTypographyProps={{fontSize: 20, fontWeight: 'medium', letterSpacing: 0}}
                 />
               </ListItemButton>

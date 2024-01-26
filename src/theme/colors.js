@@ -13,7 +13,7 @@ const withAlphas = (color) => {
 
 export const brandKit = {
   topNav: "#C7F1DD",
-  sideNav: "#8DEBC2",
+  sideNav: "#FFFFF",//"#8DEBC2", 
   sideNavTitles: "#236980"
 }
 

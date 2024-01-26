@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { brandKit } from '../../theme/colors';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SemaIcon from '../../assets/LogoSema02.png'
 import PersonIcon from '@mui/icons-material/Person';
 import HelpIcon from '@mui/icons-material/Help';
@@ -41,6 +41,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -141,6 +142,7 @@ export default function MiniDrawer ({children}){
   //const pathname = usePathname();
   let location = useLocation();
   const theme = useTheme();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -170,7 +172,8 @@ export default function MiniDrawer ({children}){
    setMenuOpen(!menuOpen)
   }
 
-  
+  const login = useSelector(state => state.login)
+  const { userInfo } = login
 
   return (
     <ThemeProvider theme={mytheme}>
@@ -221,31 +224,40 @@ export default function MiniDrawer ({children}){
               </Box>
             </Modal>
             
-            <Button style={{color: 'black'}} 
-              id="basic-button"
-              aria-controls={openMenu ? 'basic-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={openMenu ? 'true' : undefined}
-              onClick={handleClick}> <PersonIcon /> 
-            </Button>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={openMenu}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'basic-button',
-              }}
-            >
-              <MenuItem onClick={handleClose}>User Profile</MenuItem>
-              <MenuItem onClick={handleClose}>User Settings</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
-            </Menu>
+            {userInfo.name ?
+            (
+              <>
+                <Button style={{color: 'black'}} 
+                  id="basic-button"
+                  aria-controls={openMenu ? 'basic-menu' : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={openMenu ? 'true' : undefined}
+                  onClick={handleClick}> <PersonIcon /> 
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={openMenu}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>User Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>User Settings</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
+              </>
+              ) : 
+              (
+                <Button style={{color: 'black'}} onClick={() => navigate('/login')}>Login</Button>
+              )
+          }
           </div>
           
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} >
+      <Drawer variant="permanent" open={open} className="minidrawer-styles">
         <DrawerHeader >
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}

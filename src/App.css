@@ -23,12 +23,23 @@
 }
 
 .css-15wwp11-MuiTableHead-root{
-  background-color: #C7F1DD;
+  background-color:  #C7F1DD;
 }
 
 .leftMenuItems{
   display: flex;
   align-items: center;
+}
+
+.minidrawer-styles{
+  display: flex;
+  width: 300px;
+  padding: 1px 0px 358px 0px;
+  flex-direction: column;
+  align-items: center;
+
+  border-right: 1px solid var(--Line-separator, #F1F1F1);
+  background: var(--Secondary, #FFF);
 }
 
 .App-header {
